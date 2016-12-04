@@ -1,0 +1,113 @@
+# 第12天 JS 缓动动画
+
+缓动动画 缓动框架
+
+---
+
+
+## 缓动动画
+**原理**: 匀速动画是每次移动的距离固定, 缓动动画则是每次移动的距离处于渐变的一个过程, 常用的公式为
+` leader = leader + (target - leader) / 10;`
+
+- 缓动动画的封装
+```
+function animate(element,target) {
+        //先清除定时器, 防止多个定时器产生
+        clearInterval(element.timer);
+        element.timer = setInterval(function () {
+            var leader = element.offsetLeft;
+            //设定缓动动画的步长
+            step = (target - leader) / 10;
+            //取整
+            step > 0 ? step = Math.ceil(step) : step = Math.floor(step);
+            leader = leader + step;
+            element.style.left = leader + "px";
+            //到达位置清除定时器
+            if (leader == target) {
+                clearInterval(element.timer);
+            }
+        }, 15);
+    }
+```
+
+## 获取元素的计算后样式
+
+`window.getComputedStyle(box, null);`
+1. 第一个参数: 需要获取样式的元素
+2. 第二个参数: null
+
+- 兼容性问题
+```
+//IE 678 兼容 currentStyle
+function getStyle(element, attr) {
+    //能力检测
+    if(window.getComputedStyle)
+    return window.getComputedStyle(element,null)[attr];
+} else {
+    return element.currentStyle[attr];
+}
+```
+
+## 缓动框架
+
+在缓动动画封装的基础上, 继续封装, 添加新的其他属性, 形成缓动(移动, 改变大小, 改变透明度, 改变层级zIndex)
+
+### 2参数版
+- 根据需求, 改变移动或者改变大小(单一属性时), 传入的参数里加入属性和属性值(2个参数)
+- 修改缓动动画,利用getStyle()兼容封装来获得当前传入的属性名称来获取计算后的对应的属性值(此时为带px的值), 把获得的值取整去掉单位后赋值给leader
+- 依然是缓动动画里的处理流程, 到达传入的值后清除定时器
+
+### 多参数版
+- **重点**: 当传入多参数时, 此时引入json, 同时利用for-in遍历方式来获得多个键值对
+- 修改传入的参数为json
+- 定时器里加入for(var k in json){}来遍历json
+- 把缓动动画放入for in循环里
+- 此时基本可以完成功能, 但清除定时器的条件需要更改, 必须要让所有属性到达位置后才清除
+- 利用假设成立法, 在for循环之前假设flag = true;
+- 循环中, 判断当前和目标是否一样, 不一样则返回false;
+- 清除定时器的功能放到循环之后, 当判断最终flag = true时, 才清除定时器
+
+### 多参数+回调函数
+- 传入的参数里, 加入函数fn
+- 函数执行放到清除定时器clearInterval之后
+- 此时回调函数会在animate动画结束后, 再执行
+- 可以在fn函数里再次加入animate动画
+- 当没有fn传入时, 执行animate里的函数会报错
+- animate里加入`fn && fn()`来装逼, 直接判断有函数就执行函数, 没有就自动default忽略
+
+```
+function animate(element, json,fn) {
+        clearInterval(element.timer);
+        element.timer = setInterval(function () {
+            var flag = true;
+            for (var k in json) {
+                var attr = k;
+                var target = json[k];
+                //并上0的意思是有可能在没设置的情况下取到auto之类的值
+                var leader = parseInt(getStyle(element, attr))||0;
+                step = (target - leader) / 10;
+                step > 0 ? step = Math.ceil(step) : step = Math.floor(step);
+                leader = leader + step;
+                element.style[attr] = leader + "px";
+                if (leader != target) {
+                    flag = false;
+                }
+            }
+            if(flag) {
+                clearInterval(element.timer);
+                //装逼利器, 否则没传入时会报错
+                fn && fn();
+            }
+        }, 15);
+    }
+```
+
+### 案例: 手风琴
+利用缓动框架, 扩大当前选中的li, 缩小其他的li, 直接就可以形成手风琴的效果了
+
+- li浮动版本由于动画的渐进过程, 会导致白边或者超出ul范围的情况, 非常难看
+1. 特殊处理方式1: 扩大ul的范围, 然li在一行完全展示不会出去;另外最后一张图片白边的解决方式为减少box的显示范围, 让白边的情况不展示出来
+2. 特殊处理方式2: 上一种处理方式比较硬, 感觉不好, 可以利用定位的方式来处理: li由于同级关系, 后面的li会覆盖前面的li, 这时候先把li全部定位到均分的位置上, 再针对鼠标经过的li和其他的li 处理绝对定位的left值
+
+
+Tags： black_horse
