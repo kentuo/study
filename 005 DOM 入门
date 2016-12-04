@@ -1,0 +1,68 @@
+# 第5天 DOM
+
+DOM入门
+
+---
+
+###数据存储
+对于简单类型来说,形参改变了,实参不变(简单类型的存储在栈内存里)
+对于复杂类型来说,如果形参变了,实参也会变(他们从栈内存指向了同一个地址的堆内存)
+
+##DOM
+(Document Object Model)文档对象模型,文档树模型,是用来操作html和Xml的一套API(工具)
+万物皆对象, DOM把所有东西都封装成了对象
+节点:DOM中把这些封装好的对象,叫做[节点]
+元素:实际使用中操作最多的是[标签节点]
+document :整个页面被封装成了一个对象,这个对象就叫document
+
+为什么要弄成树形结构:为了方便查找
+父节点:parent
+兄弟节点:sibling
+子节点:child
+
+Xml(Extensible Markup Language)
+
+可扩展性标记语言,常用于配置文件,或者用于数据交互(类似JSON)
+
+API(Application Programming Interface):
+
+应用程序编程接口,接口是别人给我们写好的,直接使用就可以,暂时可以理解为工具
+
+console.dir();打印元素的时候,以对象的形式来显示
+
+document.getElementById("btn");//通过id找到元素
+btn.value = "点击我";//设置元素(对象)的属性
+
+##事件
+事件三要素:事件源、事件名称、事件处理程序
+
+**注册事件的2种方式**
+1. 行内式注册事件，在标签内添加事件（不推荐使用，不方便维护）
+2. 内联式
+3. 、、、
+
+页面加载的时候，只会注册事件，并不会执行事件，只有点击之后才会执行
+
+###a标签注册事件
+onclick事件中，最终返回一个return false，可以阻止a标签在点击之后进行跳转
+
+**多个a标签**
+var resoult = document.getElementsByTagName("a");
+得到的结果是一个伪数组(不是数组),但是可以和数组一样通过下标获取元素和遍历,不能使用数组的方法
+for循环遍历可以给结果进行事件注册,**for循环中的当前对象必须要用this**
+
+细节1: 用TagName获取的是伪数组,即使只有一个,也需要用下标获取元素
+细节2: ul.document.getElementsByTagName("lis");缩小选择范围
+细节3: 不要用ul.getElementById("ll"); ,会报错, 元素没有getElementBtId属性,用document
+
+##代码调试
+F12 代码出错了直接可以看到
+
+其他
+字符串的替换(replace)方法
+var str = "aaa bbb cc dd eeeee";
+var result = str.replace("cc","fff");**必须要接收一下替换的字符串,因为不会改变str的内容**
+
+
+
+Tags： black_horse
