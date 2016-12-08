@@ -96,6 +96,7 @@
 
 #### 配置虚拟主机
 在一台Web服务器上，我们可以通过配置虚拟主机，然后分别设定根目录，实现对多个网站的管理
+
 1. 开启虚拟主机辅助配置: 修改httpd.conf, 找到Virtual hosts, 去掉Include conf/extra/httpd-vhosts.conf前面的"#"
 2. 配置虚拟主机, 安装目录里conf/extra/httpd-vhosts.conf, 打开后, 把<VirtualHost>标签里的内容复制一份
 3. 复制后修改3个地方, ①DocumentRoot根目录路径, ②ServerName网址, ③ServerAlias带www的网址, 如www.myproject.com
