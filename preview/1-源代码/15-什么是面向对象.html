@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div {
+			height: 50px;
+			width: 300px;
+			background-color: hotpink;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+
+	<script type="text/javascript" src="jquery-1.12.3.js"></script>
+	<script type="text/javascript">
+		// 什么是 面向对象 ？
+		// 			万物皆对象！
+		
+		// 1 面向对象和面向过程的区别
+		// 2 在JavaScript中是如何实现面向对象的
+		// 3 谈下其他语言中的面向对象
+		
+		
+		// 		面向过程的方式：
+		// 		做饭
+		// 		自己动手做饭的过程，就是一个面向过程的方式。
+		// 			所有的事情都需要我们亲历亲为，执行者。
+		
+		// 		面向对象的方式：
+		// 		我们早晨是怎么吃的饭？
+		// 			找到一个餐馆，然后把钱给老板，最后老板把饭菜给你
+		// 			现在把自己放在了： 调度者。
+		
+		
+		// 需求： 给页面中所有的div元素添加边框
+		// 1 面向过程的方式：
+		// 		1.1 获取到页面中的div元素
+		// 		1.2 循环遍历获取到的所有div元素
+		// 		1.3 给每一个div元素设置边框
+		// var dvs = document.getElementsByTagName("div");
+		// for(var i = 0; i < dvs.length; i++) {
+		// 	dvs[i].style.border = "2px dotted blue";
+		// }
+
+		// 使用 jQuery 来实现设置样式操作：（面向对象的方式）
+		// $("div").css("border", "2px dotted blue");
+		
+		// 需求： 动态创建div元素然后设置内容
+		// 1 面向过程的方式：
+		// 		1.1 创建div元素节点
+		// 		1.2 创建文本节点
+		// 		1.3 要将创建的文本节点追加到 元素节点中
+		// 		1.4 在将元素节点追加到页面中
+		// var dv = document.createElement('div');
+		// var txt = document.createTextNode("这是cdiv的内容");
+		// dv.appendChild(txt);
+		// document.body.appendChild(dv);
+
+		// $() 可以动态创建标签
+		// appendTo 的参数可以是：选择器
+		$("<div>这是cdiv的内容</div>").appendTo("body");
+
+		// 以上的代码怎么就变成了面向对象的方式？
+		// jQuery
+	</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 有一个歌曲列表，实现对这个列表的 增删改查！
+		var songsList = [
+			{ "sName": "痴心绝对", "sSinger": "李圣杰"},
+			{ "sName": "南山南",  "sSinger": "马頔"}
+		];
+
+		// 添加4个方法
+		var addSong = function(songInfo) {
+			songsList.push(songInfo);
+		};
+		
+		// 删除
+		var deleteSong = function(name) {
+			for(var i = 0; i < songsList.length; i++) {
+				var temp = songsList[i];
+				if(temp.sName === name) {
+					// 将当前的歌曲删除
+					// splice(index ,length)
+					// 根据数组的索引号来删除数组的项
+					songsList.splice(i, 1);
+					break;
+				}
+			}
+		};
+
+		// 修改
+		var updateSong = function(name, value) {
+			// for(var i = 0; i < songsList.length; i++) {
+			// 	var temp = songsList[i];
+			// 	if(temp.sName === name) {
+			// 		temp.sSinger = value;
+			// 		break;
+			// 	}
+			// }
+			
+			// 调用查询的函数，实现查询歌曲信息的功能
+			var temp = getSong(name);
+			if(typeof temp === "object") {
+				temp.sSinger = value;
+			}
+		};
+		
+		// 查询
+		var getSong = function(name) {
+			for(var i = 0; i < songsList.length; i++) {
+				var temp = songsList[i];
+				if(temp.sName === name) {
+					// console.log(temp);
+					return temp;
+				}
+			}
+
+			return "没有找到当前歌曲的信息！";
+		};
+
+		// 查询
+		var s = getSong("痴心绝对");
+		console.log(s);
+
+		// // 添加歌曲信息
+		// addSong({"sName": "北京北京", "sSinger": "汪峰"});
+		// s = getSong("北京北京");
+		// console.log(s);
+
+		// // 删除
+		// deleteSong("北京北京");
+		// s = getSong("痴心绝对");
+		// console.log(s);
+		
+		// 修改
+		updateSong("痴心绝对", "李圣杰！！！");
+
+		s = getSong("痴心绝对");
+		console.log(s);
+	</script>
+</body>
+</html>

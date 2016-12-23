@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 案例：求两个数的最大值
+		var maxNum = function(num1, num2) {
+			return num1 > num2? num1: num2;
+		};
+
+		// console.log( maxNum(8, 10) );
+
+		// 使用Function来创建函数
+		var fn = new Function("num1", "num2", "return num1 > num2? num1: num2;");
+		// console.log( fn(13, 9) );
+		
+		// 总结：
+		// 1 Function 是一个构造函数，其实就是一个函数
+		// 2 通过 new Function() 可以创建一个函数对象
+		// 3 函数就是对象
+		// 4 因为对象是有原型对象的，又因为函数也是对象
+		// 		那么说明 函数也有原型对象（此处，是把函数当作 对象！）
+		
+		// 问题：函数的原型对象是谁？
+		// 把函数fn看作是一个对象，那么fn的原型对象是： Function.prototype
+		console.log(fn.__proto__ === Function.prototype);
+	</script>
+</body>
+</html>

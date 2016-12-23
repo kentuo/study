@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 面向对象的方式：
+		// 1 有一个构造函数，配合new来创建对象
+		// 2 需要创建一个对象（实例）
+		// 3 构造函数有一个原型
+
+		// 通过构造函数来管理的数组，应该放到什么位置？
+		// 数据一般情况下，就放到构造函数中
+		// 方法一帮情况下，就放到原型中
+
+		// 歌曲列表管理的构造函数
+		var SongsManager = function(list) {
+			// songsList中存储的就是 歌曲的信息！
+			// 将来原型中的方法，要操作的数据，就是从 songsList 中获取的！
+			this.songsList = list || [];
+		};
+		
+		// SongsManager.prototype.addSong = function() {};
+		SongsManager.prototype = {
+			constructor: SongsManager,
+			addSong: function(songInfo) {
+				this.songsList.push(songInfo);
+			},
+			deleteSong: function(name) {
+				var sl = this.songsList;
+
+				for(var i = 0; i < sl.length; i++) {
+					var temp = sl[i];
+					if(temp.sName === name) {
+						// 将当前的歌曲删除
+						// splice(index ,length)
+						// 根据数组的索引号来删除数组的项
+						sl.splice(i, 1);
+						break;
+					}
+				}
+			},
+			updateSong: function(name, value) {
+				// 调用查询的函数，实现查询歌曲信息的功能
+				var temp = this.getSong(name);
+				if(typeof temp === "object") {
+					temp.sSinger = value;
+				}
+			},
+			getSong: function(name) {
+				var sl = this.songsList;
+				for(var i = 0; i < sl.length; i++) {
+					var temp = sl[i];
+					if(temp.sName === name) {
+						// console.log(temp);
+						return temp;
+					}
+				}
+
+				return "没有找到当前歌曲的信息！";
+			}
+		};
+
+		// 调用
+		// 没有传入参数
+		var song1 = new SongsManager();
+		// 调用添加歌曲信息的方法
+		song1.addSong({"sName": "心太软", "sSinger": "任贤齐" });
+		song1.addSong({"sName": "伤心太平洋", "sSinger": "任贤齐" });
+		// 获取歌曲信息
+		// var s = song1.getSong("心太软");
+		// console.log(s);
+
+		// // 获取所有的歌曲信息
+		// console.log(song1.songsList);
+
+		// 删除
+		song1.deleteSong("心太软");
+		var s = song1.getSong("伤心太平洋");
+		console.log(s);
+		
+		// 修改
+		song1.updateSong("伤心太平洋", "齐叔");
+		s = song1.getSong("伤心太平洋");
+		console.log(s);
+
+
+
+		/*// 传入一些初始化的歌曲信息
+		var song2 = new SongsManager([
+			{ "sName": "痴心绝对", "sSinger": "李圣杰"},
+			{ "sName": "南山南",  "sSinger": "马頔"}
+		]);*/
+	</script>
+</body>
+</html>

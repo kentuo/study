@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div, p {
+			height: 50px;
+			width: 300px;
+			background-color: hotpink;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	
+	<script type="text/javascript">
+		// 需求： 给页面中所有的div元素添加边框
+		// 1 分析问题的思路
+		// 		1.1 获取到页面中的div元素
+		// 		1.2 循环遍历获取到的所有div元素
+		// 		1.3 给每一个div元素设置边框
+
+		// var dvs = document.getElementsByTagName("div");
+		// for(var i = 0; i < dvs.length; i++) {
+		// 	dvs[i].style.border = "2px dotted blue";
+		// }
+
+		
+		// 通过这种方式组织代码有什么问题？
+		// 1 方法名字很长很难记忆
+		// 2 无法实现代码的复用
+
+		// 修改第一步：
+		// 1 封装函数，实现代码的复用
+		
+		// 作用：就是通过标签名来获取元素
+		var tag = function(tagName) {
+			// var tags = document.getElementsByTagName(tagName);
+			// return tags;
+			return document.getElementsByTagName(tagName);
+		};
+
+		// 封装一个通过id获取页面中元素的方法
+		var id = function(idName) {
+			return document.getElementById(idName);
+		};
+		
+		// 设置样式的方法
+		// 第一个参数表示： 要遍历的对象
+		// 第二个参数表示：样式属性的属性名
+		// 第三个参数表示：样式属性的值
+		var setStyle = function(list, name, value) {
+			for(var i = 0; i < list.length; i++) {
+				// list[i].style.border = "5px dotted blue";
+				// list[i].style.name = value;
+
+				// list[i].style["border"] = "5px solid green";
+				list[i].style[name] = value;
+			}
+		};
+
+		// 调用，获取页面中的div元素
+		// 函数有一个参数，也有一个返回值
+		var list = tag("div");
+		setStyle(list, "border", "5px solid green");
+
+		// for(var i = 0; i < list.length; i++) {
+		// 	list[i].style.border = "5px dotted blue";
+		// }
+
+
+		// 现在要给 p 元素设置样式
+		var  ps = tag("p");
+		setStyle(ps, "background-color", "yellowgreen");
+	</script>
+</body>
+</html>

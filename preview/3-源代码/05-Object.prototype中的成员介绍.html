@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		console.log(Object.prototype);
+
+		// ECMAScript 里面有的规范，就是标准的！
+
+		// constructor：表示当前的构造函数 ，在Object.prototype中 它指向了 Object
+		// console.log(Object.prototype.constructor === Object);
+
+		// hasOwnProperty
+		// has 有
+		// own 自己的
+		// property 属性
+		// 作用： 就是用来判断属性是不是对象自身提供的
+		// 			继承的不算！
+		// 语法： 布尔值 = 对象.hasOwnProperty(属性名);
+		var obj = {
+			name: "张三"
+		};
+		// var b = obj.hasOwnProperty("toString");
+		// console.log(b);
+
+		// isPrototypeOf
+		// is 是
+		// prototype 原型
+		// of 。。。的
+		// 语法： 原型.isPorototypeOf(对象);
+		// 作用： 判断前面的原型是不是 后面对象的原型
+		// 			或者 只要原型在 对象的原型链上，那么返回值就是 true，
+		// 			否则就是false
+		// console.log( Object.prototype.isPrototypeOf(obj) ); // true
+		// console.log( obj.isPrototypeOf(Object.prototype) ); // false
+
+		// var Person = function() {};
+		// var p = new Person();
+		// console.log(Person.prototype.isPrototypeOf(p));  // true
+		// console.log(Object.prototype.isPrototypeOf(p));  // true
+
+		// propertyIsEnumerable()
+		// property: 属性
+		// is 是
+		// enumerable 可枚举的/可遍历
+		// 语法： 对象.propertyIsEnumerable(属性名)
+		// console.log(obj.propertyIsEnumerable("name"));
+		// console.log(obj.propertyIsEnumerable("toString"));
+
+		// // ES5 中，声明对象的方式： Object.defineProperty()
+		// var obj1 = {};
+		// // 第一个参数：表示要设置的对象
+		// // 第二个参数：表示要设置的属性名
+		// // 第三个参数：一个对象，通过对象中的特性来设置当前属性的一些特殊行为
+		// Object.defineProperty(obj1, "name", {
+		// 	value: "jack",
+		// 	enumerable: true
+		// });
+		// console.log(obj1.propertyIsEnumerable("name"));
+		// for(var k in obj1) {
+		// 	console.log(k);
+		// }
+
+		// toLocaleString / toString
+		// locale 本地 / 现场
+		// 作用：都能够转化为字符串
+		// var d = new Date();
+		// console.log(d);
+		// console.log(d.toString());
+		// console.log(d.toLocaleString());
+
+		// valueOf 获取值
+		// valueOf / toString
+		var obj = {
+			// valueOf: function() {
+			// 	return 10;
+			// },
+			toString: function() {
+				return "abc";
+			}
+		};
+
+		var num = 1;
+		// 默认情况
+		// console.log(num + obj); // "1[object Object]"
+
+		// 如果valueOf 和 toString同时存在，此时，会先调用 valueOf ，然后调用toString
+		console.log(num + obj);
+	</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// eval 求…的值（或数）
+		// 语法： eval(字符串);
+		// 使用： eval("");
+		// 作用： 将字符串当作是js代码来执行！
+
+		// alert("这是一个很难看的提示！");
+
+		// 1 性能相对于普通的代码来说要慢！
+		// 2 有一些安全性问题, （跨站脚本攻击 XSS）
+		
+		/*// eval("var a = 123;");
+		eval("alert('恶意弹框');");
+		// var a = 123;
+		console.log(a);*/
+		
+		// 应用场景： 
+		// 1 在线学习的网站
+		// 2 将JSON格式的字符串转化为 JSON对象
+		// 		JSON格式的特点： 属性名一定是要带有双引号！
+		
+		// 		http://json.org/json-zh.html --> JSON的官网！
+		// 
+		var str = '{ "name":"jim", "age": 18, "gender": "男"}';
+		// JSON.parse(str);
+		// json2.js 低版本浏览器不支持JSON.parse方法的解决方案
+		
+		// 第一种形式：
+		// var json = eval("(" + str + ")");
+		// console.log(json);
+
+		// 第二种形式：
+		eval("var json = " + str);
+		console.log(json);
+
+	</script>
+</body>
+</html>

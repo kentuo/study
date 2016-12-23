@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 值（基本）类型 和 引用（复杂）类型
+		// 
+		// 值类型包括： number / string / boolean / null / undefined
+		// 引用类型：  object（Array / Function / RegExp / Object / Date / Math / String / Number / Boolean） 大写的Array等都是 构造函数
+
+		// 注意： 类型就是用小写来表示！
+
+		// 最核心的两个对象: Object / Function
+
+		// 如何获取数据类型： typeof 关键字, 只有通过 typeof 关键字 来获取类型的时候
+		// 才能获取到 小写的 number / boolean / object .....
+		// console.log(typeof 123);
+		// console.log(typeof "abc");
+		// console.log(typeof true);
+		// console.log(typeof null);
+		// console.log(typeof undefined);
+
+		// console.log(typeof []);
+		// console.log(typeof {});
+		// console.log(typeof new Object());
+
+		// 创建一个数值类型的对象
+		// console.log( typeof new Number(123) );
+		// console.log( typeof Number );   // function, 函数也是对象
+
+		// console.log( new Number(123) );
+		// console.log( 123 === new Number(123) );
+
+		// 这样写会报错： 因为js语言中不存在小写的object ，此时，js引擎会把object 当作是一个变量来解析！但是，因为这个变量没有声明所以，直接报错！
+		// console.log(object);
+
+	</script>
+</body>
+</html>

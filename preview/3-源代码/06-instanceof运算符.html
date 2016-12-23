@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// instanceof 
+		// instance： 实例
+		// 
+		// 语法： 对象 instanceof 构造函数
+		// 作用：用来查看构造函数的prototype是否在被检测对象的原型链上，如果在就返回：true
+		// 		 否则返回：false
+		
+		var Person = function() {};
+		// 对象的原型链在对象被创建的时候，就固定下来了
+		var p = new Person();
+
+		// p 的原型链有那些成员：Person.prototype -> Object.prototype -> null
+		// console.log(p instanceof Person); // true
+		// console.log(p instanceof Object);
+
+		// 变形：
+		Person.prototype = {};
+		// 因为 修改了Person.prototype的值，并且这个新的值，不在对象的原型链上
+		// 所以结果为：false
+		// console.log(p instanceof Person);
+
+		// 记忆 instanceof 作用的小技巧：
+		// 如果对象被创建之后，没有修改过prototype，那么结果就是：true
+		// 如果对象被创建之后，修改过prototype，那么结果就是：false
+
+		// 所有的对象都直接或间接的继承自 Object
+		// 任何对象 instanceof Object 结果都是：true
+		console.log(p instanceof Object);
+		console.log({} instanceof Object);
+		console.log([] instanceof Object);
+		console.log(new Date() instanceof Object);
+		console.log(new String() instanceof Object);
+		console.log(new Number() instanceof Object);
+		console.log(new Boolean() instanceof Object);
+		console.log(new RegExp() instanceof Object);
+		console.log(Math instanceof Object);
+		console.log(new Function() instanceof Object);
+
+		// 函数的原型链
+		console.log(Person instanceof Object);
+		console.log(Object instanceof Object);
+	</script>
+</body>
+</html>

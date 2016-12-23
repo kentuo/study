@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 创建对象方式：
+		// 
+		// 1 使用对象字面量（直接量）
+		// 		var obj = {};
+		// 
+		// 2 使用 new 关键字来创建对象
+
+		// var p = new Object();
+		// 如果使用的就是一个普通的对象就使用 字面量的形式
+		// var o = {};
+
+		var o = {
+			name: "xiaozhi",
+			age: 19,
+			gender: "为止"
+		};
+
+		// 访问对象的属性两种形式：
+		// 1 点运算符
+		// 2 []		
+		// 
+		// 推荐： 能使用 点 就使用点运算符来获取或设置对象的属性
+		
+		// console.log(o.name);
+		// console.log(o["name"]);
+
+		for(var k in o) {
+			// o.k 表示什么含义：表示获取对象o中的k这个属性，
+			// 但是对象o中没有k这个属性，所以获取的值是：undefined
+			// console.log(o.k);
+
+			// 此处的k 是一个变量，变量的值就是：对象中的 键（属性名）
+			console.log(k);
+			console.log(o[k]);
+		}
+		
+
+	</script>
+</body>
+</html>

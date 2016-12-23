@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+
+		var Fn = function() {};
+
+		// 1 先把Fn当作是一个构造函数来看待
+		var f = new Fn();
+
+		// 2 再把Fn当作是一个函数对象来看待
+		// 此时，函数Fn是Function的实例
+
+		var obj = new Object();
+
+		// console.log(Object.__proto__.constructor === Function);
+
+		// Function即是对象也是函数
+		// 如果把Function看作是一个对象，此时，它继承自：Function.prototype
+		
+		// 这句话是JS整个原型链中最经典，也是最无法解释的一条结论！
+		
+		// 在JS中只有一个对象，它的 __proto__ 和 prototype 指向了同一个对象！
+		// 就是 Function
+		console.log(Function.__proto__ === Function.prototype);
+	</script>
+</body>
+</html>

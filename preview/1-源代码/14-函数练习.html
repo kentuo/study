@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 练习：写一个函数打印一段文字，要求：传入什么内容，就打印什么内容
+		// 		如果没有传入参数，就打印： 请传入参数！
+		
+		var fn = function(str) {
+			// 如果函数的参数不传入，那么str就是 undefined
+			// console.log( str || "请输入参数" );
+			
+			if(str === undefined) {
+				console.log("请输入参数")
+			} else {
+				console.log(str);
+			}
+		};
+
+		// fn();
+		// fn("使用逻辑操作");
+		fn("");
+
+	</script>
+</body>
+</html>

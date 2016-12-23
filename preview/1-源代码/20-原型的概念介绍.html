@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 原型的作用： 为了数据共享！
+		var Person = function(name, age, height, gender) {
+			this.name = name;
+			this.age = age;
+			this.height = height;
+			this.gender = gender; // female
+				
+			// 如果创建多个对象，会造成内存的浪费，因为没创建一个对象
+			// 在内存中就会有一个 coding 方法的副本！
+			// this.coding = function() {
+			// 	console.log("hello world!");
+			// };
+		};
+		
+		// 原型
+		// 每个函数都有一个 prototype 属性，这个属性是一个对象类型的
+		// console.log(typeof Person.prototype);
+		
+		// 因为 prototype 是一个对象，所以，可以使用点语法，来给这个对象
+		// 添加属性
+		Person.prototype.coding = function() {
+			console.log("hello world!");
+		};
+		
+		// 添加另外一个方法：
+		Person.prototype.sayHi = function() {
+			// this 是谁：谁调用的这个方法，this就指向了谁！
+			console.log("你好，我是：" + this.name);
+		};
+
+		// 添加了属性之后，在通过该构造函数床架出来的对象，就可以使用这个原型中的的方法了！
+		var p = new Person("xiaozhi", 20, 180, "男");
+		p.coding();
+		p.sayHi();
+
+		var p1 = new Person("xiaoming", 25, 185, "男");
+		p1.sayHi();
+
+		// 说明了，在内存中只有一份 sayHi 的副本，这个副本是存在于：构造函数的原型中的！
+		// 就是在： Person.prototype 中
+		console.log(p.sayHi === p1.sayHi);
+
+		// 什么是原型？
+		// 		构造函数的prototype属性的值 就是原型
+		// 		
+		// 		原型是对象类型的！
+		// 		
+		// 		prototype属性是 JS引擎提供的一个属性，不需要我们手动的创建就存在！
+		// 		
+		// 		Person.prototype
+		// 		
+		// 		此处 prototype属性的值，就是原型对象本身！
+
+		// 原型的作用： 实现 数据共享的！
+		// 		为了实现继承！
+
+		// 具体的例子模拟：
+		var obj = {
+			style: {}
+		};
+
+		// 类比：
+		// obj 就相当于： Person
+		// obj对象中的 style  属性就相当于： prototype
+		// obj.style ===> Person.prototype
+
+		// 相当于： obj是一个对象，这个对象有一个属性叫做：style
+		// 这个style属性的值 也是对象
+		// obj.style
+		obj.style.say = function() {};
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面试题</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 考察：值类型和引用类型的区别
+		// 
+		// 值类型： 	如果一个变量存储的是值的本身那么就是一个值类型
+		// 		number / string / boolean
+		// 		
+		// 引用类型：	如果一个变量存储的是引用（地址），那么就是一个引用类型
+
+		// 值类型
+		// var num = 123;
+		// var num2 = num; 		// 实际上是将 num的值 传给 num2
+		// num = 456;
+		// console.log(num2);		// 123
+		
+		
+		// 引用类型
+		// 引用类型分为两个存储空间:
+		// 1 存储引用的变量 (栈)
+		// 2 对象在内存中的位置 (堆)
+		// 
+		var obj = {name: "xiaoming"}; // obj 中存储的是 对象 的地址
+		var obj2 = obj;				  // 这句话,表示把 obj 指向对象的地址交给了 obj2 
+		obj.name = "xiaozhi";		  // 这句话,表示通过 obj 找到obj指向的对象,然后修改
+									  // 对象中的name属性, 值修改为: "xiaozhi"
+		console.log(obj2.name);	 	  // xiaozhi
+
+	</script>
+</body>
+</html>

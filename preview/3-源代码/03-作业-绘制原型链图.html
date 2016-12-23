@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    	
+	    function Fn() {}
+	    var f1 = new Fn();
+	    // Fn.prototype = {};
+
+	    // obj1 -> Object.prototype
+	    var obj1 = new Object();
+	    // var obj1 = {};
+	    // 因为此处修改了 Person.prototype 的指向，改为： 一个空对象（构造函数Object的实例）
+	    // 如果再访问 Fn.prototype.constructor 其实就是在访问：
+	    // 	obj1.constructor ，就是去 obj1的原型对象中找， obj1的原型对象就是：Object.prototype
+	    Fn.prototype = obj1;
+	    
+	    console.log(f1.__proto__ === Fn.prototype);		// false
+	    console.log(f1.__proto__.constructor === Fn);	// true
+	    console.log(Fn.prototype.constructor);			// Object
+	    console.log(Fn.prototype.constructor === Object);			// true
+
+	    // console.log(Fn.constructor === Function)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 经典继承： Object.create() 
+		// ES5 里面提供的这个方法，低版本的IE浏览器不支持！
+		
+		// 语法： var 新对象 = Object.create(对象2);
+		// 作用：会创建一个新的对象，这个对象会继承自：对象2
+		
+		var obj2 = {
+			say: function() {
+				console.log("你好")
+			},
+			duo: function() {
+				console.log("双11");
+			}
+		};
+
+		// 要创建一个对象，这个对象要继承自 obj2
+		// 让 obj2 作为 obj 的原型对象了！
+		var obj = Object.create(obj2);
+		obj.say();
+		obj.duo();
+		console.log(obj);
+
+		// Object.create 的原理：
+		// 如果要自己实现一个 create 函数并且实现该功能，应该怎么做？
+		// 1 创建新对象
+		// 2 将参数设置为新对象的原型对象
+
+		/*function F() {}
+		F.prototype = obj2;
+		// 实例对象f 继承自谁？？ F.prototype
+		var f = new F();
+		console.log(f);*/
+		
+		// 实现一个兼容所有浏览器的 create 方法
+		var create = function(obj) {
+			// 思路：先判断浏览器是否支持 Object.create 
+			// 如果支持，就直接使用
+			// 如果不支持，就自己实现！
+
+			// if(typeof Object.create === "function") {
+			/*if(Object.create) {
+				return Object.create(obj);
+			} else {
+				function F() {}
+				F.prototype = obj;
+				return new F();
+			}*/
+
+			if(Object.create) {
+				return Object.create(obj);
+			}
+
+			function F() {}
+			F.prototype = obj;
+			return new F();
+		};
+	</script>
+</body>
+</html>

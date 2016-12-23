@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// delete 删除/移除
+		// 作用： 用来删除对象的属性
+		// 语法： delete 对象.属性
+
+		// var obj = {
+		// 	name: "张三"
+		// };
+		// console.log(obj.name);
+		// delete obj.name;
+		// console.log(obj.name);
+
+		// 可以用来删除：
+		// 1 对象的属性
+		// 2 数组的索引号, 删除数组中的值，不会改变数组的长度
+		// 3 没有使用var声明的变量（全局变量）
+		// var arr = [1, 8, 9];
+		// console.log(delete arr[0]);
+		// console.log(arr[0]);
+		// console.log(arr);
+
+		// 千万不要这么做！！！
+		/*ele = "饿了";
+		console.log(ele);
+		// delete ele;
+		// delete window.ele;
+		console.log(ele);*/
+
+		// 如果是 使用var
+		// 声明的变量是无法被删除掉的！
+		var ele = "buer!";
+		console.log(ele);
+		delete ele;
+		console.log(ele);
+
+
+	</script>
+</body>
+</html>

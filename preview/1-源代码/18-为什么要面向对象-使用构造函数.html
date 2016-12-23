@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 使用 对象字面量 来描述 了一个 person 对象
+		// var p1 = {
+		// 	name: "小志",
+		// 	age: 20,
+		// 	gender: "男",
+		// 	height: 180,
+		// 	coding: function() {
+		// 		console.log("hello world!")
+		// 	}
+		// };
+
+		// var p2 = {
+		// 	name: "小明",
+		// 	age: 25,
+		// 	gender: "男",
+		// 	height: 185,
+		// 	coding: function() {
+		// 		console.log("hello world!")
+		// 	}
+		// };
+
+		// 如果要创建很多这样的对象（p），
+		// 现在只能是：有一个人就创建一个对象
+
+		// 假设，现在有一100个人，要创建100个对象，只能复制粘贴！
+		// 问题：1 效率很低 2 没有维护性可言
+
+
+		// 创建对象有两种形式：
+		// 1 对象字面量
+		// 2 new 构造函数
+		// 		var o = new Object();
+
+		// 使用构造函数创建对象的语法：
+		// 1 构造函数的名字推荐使用 帕斯卡命名规则 （首字母大写）
+		// 2 构造函数本质上就是一个普通的函数，只不过如果这个函数是跟new一起使用的
+		// 		此时，把这个函数称作是：构造函数！
+		// 3 在构造函数的内部使用this.属性名 = 值 的形式来给 新创建出来的对象添加属性
+		var Person = function() {
+			this.name = "xiaozhi";
+			this.age = 19;
+			this.height = 180;
+			this.gender = "male"; // female
+
+			this.coding = function() {
+				console.log("hello world!");
+			};
+		};
+		
+		// 创建对象： 使用 new关键字 后面跟函数调用
+		var p = new Person();
+		console.log(p);
+		console.log(p.name);
+		p.coding();
+
+
+		// 以后，想创建多少个对象，就使用 new 来创建多少次即可！
+		for(var i = 0; i < 100; i++) {
+			var p = new Person();
+			console.log(p);
+		}
+
+		// var p = new Person;
+	</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 有一个歌曲列表，实现对这个列表的 增删改查！
+		var songsList = [
+			{ "sName": "痴心绝对", "sSinger": "李圣杰"},
+			{ "sName": "南山南",  "sSinger": "马頔"}
+		];
+		
+		// 添加歌曲信息
+		songsList.push({"sName": "北京北京", "sSinger": "汪峰"});
+		console.log(songsList);
+		
+		// 删除歌曲信息
+		// 根据歌曲名称删除歌曲信息
+		// var name = "痴心绝对";
+		// for(var i = 0; i < songsList.length; i++) {
+		// 	var temp = songsList[i];
+		// 	if(temp.sName === name) {
+		// 		// 将当前的歌曲删除
+		// 		// splice(index ,length)
+		// 		// 根据数组的索引号来删除数组的项
+		// 		songsList.splice(i, 1);
+		// 		break;
+		// 	}
+		// }
+
+		// console.log(songsList);
+
+		// 修改
+		// 根据歌曲名称来修改 演唱者！
+		// for(var i = 0; i < songsList.length; i++) {
+		// 	var temp = songsList[i];
+		// 	if(temp.sName === name) {
+		// 		temp.sSinger = "李圣杰1";
+		// 		break;
+		// 	}
+		// }
+		// console.log(songsList);
+		
+		// 查询
+		// 根据歌曲名称来查找当前歌曲的信息！
+		name = "北京北京";
+		for(var i = 0; i < songsList.length; i++) {
+			var temp = songsList[i];
+			if(temp.sName === name) {
+				console.log(temp);
+				break;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		var Person = function(name, age, height, gender) {
+			this.name = name;
+			this.age = age;
+			this.height = height;
+			this.gender = gender; // female
+
+			this.coding = function() {
+				console.log("hello world!");
+			};
+		};
+
+		// 创建对象： 使用 new关键字 后面跟函数调用
+		// 创建了两个对象，这两个对象中都有方法 coding 的副本
+		// 
+		// 
+		var p = new Person("xiaozhi", 20, 180, "男");
+		var p1 = new Person("xiaoming", 25, 185, "男");
+
+		// console.log(p);
+		// console.log(p1);
+
+		p.coding();
+		p1.coding();
+		console.log(p.coding === p1.coding); // false
+        console.log(p.coding.__proto__ === p1.coding.__proto__); // true
+	</script>
+</body>
+</html>

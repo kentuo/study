@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 使用面向对象组织代码的固定格式
+		// 1 所有的方法全部都放到原型中
+		// 2 属性或数据，放到构造函数中（）
+		// 3 
+		
+		// this 在构造函数中，指向的是：新创建出来的实例对象
+		// 方法内部的this，表示：哪个对象调用的这个方法，方法内部的this就指向了哪个对象
+		
+		var SongsManager = function(list) {
+			this.songsList = list || [];
+		};
+		
+		SongsManager.prototype = {
+			constructor: SongsManager,
+			addSong: function(songInfo) {
+				// 如果要在方法内部使用 songsList 这个数据
+				// this.songsList
+				this.songsList.push(songInfo);
+			}
+		};
+
+		// 创建了两个对象，这两个对象操作的数据
+		var song1 = new SongsManager();
+		song1.addSong({"sName": "心太软", "sSinger": "任贤齐" });
+		console.log(song1.songsList);
+
+		var song2 = new SongsManager();
+		console.log(song2.songsList);
+		// song1.songsList
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// || 逻辑或
+		// 		if(条件1 || 条件2 || 条件3) 此时表示：只要3个条件中任何一个满足，这个判断就成立
+		// 		用在： 设置默认值
+		// 		如果第一个表达式的值为真, 就返回第一个表达式的值
+		// 		如果第一个表达式的值为假，就返回第二个表达式的值
+		// 		
+		// 		
+		// && 逻辑与
+		// 		如果第一个表达式的值为真, 就返回第二个表达式的值
+		// 		如果第一个表达式的值为假，就返回第一个表达式的值
+		
+		var fn = function(num) {
+			// 给 num 设置默认值
+			// 在内部会将num转化为布尔值，如果转化之后的布尔值为true，就会把num的值返回
+			// 如果是false，就把 || 后面的表达式返回
+			num = num || 0;
+
+			console.log(num)
+		};
+
+		fn();
+	</script>
+</body>
+</html>

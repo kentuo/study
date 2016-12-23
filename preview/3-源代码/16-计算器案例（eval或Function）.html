@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div {
+			width: 550px;
+			margin: 100px auto;
+		}
+		button {
+			width: 60px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text" id="txtNum1" />
+		<select id="op">
+			<option value="0">--请选择--</option>
+			<option value="1">+</option>
+			<option value="2">-</option>
+			<option value="3">*</option>
+			<option value="4">/</option>
+		</select>
+		<input type="text" id="txtNum2" />
+		<button id="btnCacl">=</button>
+		<span id="retSpan"></span>
+	</div>
+	
+	<script type="text/javascript">
+		// 维护一个对象，使用对象中键值对的对应关系
+		var calcOp = {
+			"1": "+",
+			"2": "-",
+			"3": "*",
+			"4": "/"
+		};
+
+		// 思路：
+		// 1 找到 = 号按钮，然后，绑定单击事件
+		document.getElementById("btnCacl").onclick = function() {
+			// 2 获取到两个文本框以及下拉菜单
+			var txtNum1 = document.getElementById("txtNum1").value;
+			var txtNum2 = document.getElementById("txtNum2").value;
+			// value获取的是 select 下拉框中当前选择的option的value
+			var op = document.getElementById("op").value;
+			// console.log(op);
+
+			// 拿到运算符对应的value值，应该将数值转化为 运算符 才能进行计算！
+			// 1 if-else
+			// 2 switch-case
+			// 3 使用对象
+			var option = calcOp[op];
+
+			// 已经获取到两个数值以及运算符，只需要调用eval来计算
+			// 1 + 2
+			// "1" + "+" + "2" ==> "1 + 2"
+			// 就相当于：直接写了： var ret = 1 = 2;
+			// var ret = eval(txtNum1 + option + txtNum2);
+			// 
+			// 利用 new Function 来实现
+			// 因为函数需要调用，所以，此处使用：自调用函数
+			var ret = (new Function("return " + txtNum1 + option + txtNum2))();
+			
+			// 3 获取到span用来展示内容
+			document.getElementById("retSpan").innerText = ret;
+		};
+	</script>
+</body>
+</html>

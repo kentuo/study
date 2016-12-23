@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		function Person() {}
+		var p = new Person();
+		
+		// 情况一：
+		// Person.prototype = {
+		// 	sayHi: function() {
+		// 		alert(123);
+		// 	}
+		// };
+
+		// var p = new Person();
+		// p.sayHi();
+
+		
+		// 情况二：
+		// 此时，只是在对象的原型链上添加了一个属性，而没有改变原型的指向
+		// 所以，此时的 Person.prototype 就是 创建的实例对象p的原型对象！
+		Person.prototype.sayHi = function() {
+			alert("你好！");
+		};
+		p.sayHi();
+	</script>
+</body>
+</html>

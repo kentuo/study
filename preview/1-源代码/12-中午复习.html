@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 值类型： 	如果一个变量存储的是值本身，此时就是一个值类型（栈）
+		// 引用类型：	如果一个变量存储的是地址（引用），此时就是一个引用类型
+		// 			分为两个存储空间：1 地址（栈）  2 对象本身（堆）
+
+		// 1 创建对象( 引用类型 )
+		var o = new Object();
+
+		function foo(obj) {
+			// 怎么理解 obj 与 o 的关系？
+			// 1 o是一个全局变量，其值是一个对象
+			// 2 obj是函数内部的一个局部变量，只能在函数内部使用
+			// 3 把o当作实参传给了obj，相当于：
+			// 		obj = o; 此后，对象o与obj都指向了 同一个对象
+
+		    obj.name = "腐女";
+
+		    // 创建了一个新对象，让obj指向了新创建的对象
+		    // 不会影响到原来的对象中的属性
+		    obj = new Object();
+		    obj.name = "屌丝";
+		}
+
+		foo(o);
+
+		console.log(o.name); // 腐女
+
+		// 创建对象的两种方式：
+		// 1 对象字面量 {}
+		// 2 new Object();
+	</script>
+</body>
+</html>

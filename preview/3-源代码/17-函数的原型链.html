@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 前面，讨论的是：对象的原型链
+		// 在对象的原型链中有三个角色：
+		// 1 构造函数：创建实例对象
+		// 2 原型对象：构造函数的prototype属性的值
+		// 3 实例对象：被构造函数创建出来的，会继承自：原型对象
+
+		// 原型继承是讨论的：实例对象与原型对象之间的关系！
+
+
+		// 现在，我们要讨论： 函数的原型链
+		// 在函数的原型链中，我们把函数 当作 一个对象！
+		// function fn2() {}
+		// var fn = function() {};
+		// var fn1 = new Function();
+		// 不管那一种都可以把函数看作是：Function的实例
+
+		// 此时的三个角色：
+		// 1 构造函数：Function
+		// 2 原型对象：Function.prototype
+		// 3 实例对象：fn （就是函数）
+
+		// 绘制：一个函数对象的原型链
+		var fn = function() {};
+
+		// console.log(Function.prototype.constructor === Function); // true
+		// console.log(fn.__proto__ === Function.prototype);
+
+		// Function.prototype 与 Object.prototype 之间的关系
+		console.log(Function.prototype.__proto__ === Object.prototype);
+	</script>
+</body>
+</html>

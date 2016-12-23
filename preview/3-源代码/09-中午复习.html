@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 原型
+		// 1 什么是原型： 构造函数的prototype属性的值
+		// 2 讨论原型： 讨乱的是 实例对象与原型对象之间的关系
+		// 			stu 与 Student.prototype
+		// 3 继承：拿来主义，自己没有别人有，将别人的拿过来使用或者占为己有
+		// 4 继承方式：
+		// 		1 原型继承
+		// 		2 混入式继承
+		// 			for-in
+		// 		3 经典继承
+		// 			var newObj = Object.create(obj1);
+		// 			作用：1 返回一个新对象
+		// 				  2 新对象会继承自参数对象
+		// 		function F() {}
+		// 		F.prototype = obj1;
+		// 		var f = new F();
+		// 		
+		// 5 对象的原型链是在创建的那一刻，就已经固定下来了
+		// 		如果再改变了其构造函数的prototype的指向，也不会影响到已经创建好的对象的原型链
+		/*var Student = function() {};
+		// stu是一个实例对象
+		var stu = new Student();
+		// Student.prototype = {
+		// 	say: function() {
+		// 		console.log("好好学习");
+		// 	}
+		// };
+		// console.log(stu.__proto__ === Student.prototype); // false
+		Student.prototype.say = function() {
+		};
+		// stu.say();
+		console.log(stu.__proto__ === Student.prototype);*/
+
+		// 6 instanceof 
+		// 作用： 用来检测构造函数的prototype的值是否在被检测对象的原型链上
+		// 		如果在，就返回：true；否则，返回false
+		
+		var Person = function() {};
+		// p -> Person.prototype -> Object.prototype -> null
+		var p = new Person();
+		console.log(p instanceof Person); // true
+		Person.prototype = {};
+		console.log(p instanceof Person); // false
+
+		// p1 的原型链包含了哪些成员:
+		// p1 -> {}空对象 -> Object.prototype -> null
+		var p1 = new Person();
+
+
+		
+		// var obj1 = {
+		// 	name: "小明"
+		// };
+		// var newObj = Object.create(obj1);
+		// console.log(newObj.constructor);
+
+		// 自己实现 Object.create 的功能
+		// function F() {}
+		// F.prototype = obj1;
+		// var f = new F();
+
+		// console.log(f.constructor);
+		
+		
+
+	</script>
+</body>
+</html>

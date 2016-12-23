@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div, p {
+			height: 50px;
+			width: 300px;
+			background-color: hotpink;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	
+	<script type="text/javascript">
+		/*// 作用：就是通过标签名来获取元素
+		var tag = function(tagName) {
+			// var tags = document.getElementsByTagName(tagName);
+			// return tags;
+			return document.getElementsByTagName(tagName);
+		};
+
+		// 封装一个通过id获取页面中元素的方法
+		var id = function(idName) {
+			return document.getElementById(idName);
+		};
+		
+		// 设置样式的方法
+		var setStyle = function(list, name, value) {
+			for(var i = 0; i < list.length; i++) {
+				list[i].style[name] = value;
+			}
+		};*/
+
+		// 创建了三个函数，这三个函数都放到了全局环境中！
+		// 此时，会造成： 全局污染的问题！
+		// 
+		// 在开发过程中，不要往全局环境中创建太多的全局变量，
+		// 原则：整个库或者框架 只暴露一个变量到全局环境中！
+
+		// 1 将全局污染降到了最低
+		// 2 所有的方法都是通过 itcast 这个对象 访问到的
+
+		
+		/*var itcast = {
+			tag: function(tagName) {
+				return document.getElementsByTagName(tagName);
+			},
+			id: function(idName) {
+				return document.getElementById(idName);
+			},
+			setStyle: function(list, name, value) {
+				for(var i = 0; i < list.length; i++) {
+					list[i].style[name] = value;
+				}
+			}
+		};
+		
+		// 使用方法：
+		var list = itcast.tag("div");
+		itcast.setStyle(list, "border", "5px solid green");*/
+
+
+		// 优化： 将功能相似的函数放到一起（模块化）
+		var itcast = {
+			// 获取页面中的元素模块
+			query: {
+				tag: function(tagName) {
+					return document.getElementsByTagName(tagName);
+				},
+				id: function(idName) {
+					return document.getElementById(idName);
+				}
+			},
+
+			// 设置样式模块
+			setStyle: {
+				css: function(list, name, value) {
+					for(var i = 0; i < list.length; i++) {
+						list[i].style[name] = value;
+					}
+				},
+				addClass: function() {}
+			}
+			// 属性模块....
+		};
+
+		// 使用方法：
+		var list = itcast.query.tag("div");
+		itcast.setStyle.css(list, "border", "5px solid green");
+
+
+
+
+
+
+
+		// 利用了 自调用函数（了解）
+		/*(function() {
+			var a = 1;
+			var b = 1;
+			var c = 1;
+			var d = 1;
+			var e = 1;
+
+			var obj = {};
+			return obj;
+
+			window.q = obj;
+		})();*/
+
+	</script>
+</body>
+</html>

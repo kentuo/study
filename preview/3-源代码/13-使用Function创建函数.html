@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 使用 Function 创建函数的语法：
+		// argument: 参数
+		// var fn = new Function(arg1, arg2, arg3, ...., fnBody);
+		// 
+		// 1 参数可以省略
+		// 2 所有参数都是字符串类型的
+		// 3 除了最后一个参数以外，其他的参数都作为新创建的函数的参数
+		// 4 最后一个参数，是函数体！
+
+		// 这表示：创建了一个空函数
+		// var fn = new Function();
+		// var fn1 = function() {};
+
+		// 没有参数的函数：
+		// var fn = function() {
+		// 	console.log("这是一个函数");
+		// };
+		// var fn1 = new Function('console.log("这是一个函数")');
+		// fn1();
+
+		// 有参数的函数
+		// 求两个数的和
+		// var fn = function(num1, num2) {
+		// 	return num1 + num2;
+		// };
+		var fn = new Function("num1", "num2", "return num1 + num2;");
+		console.log(fn(1, 6));
+		
+		// 案例：求两个数的最大值
+	</script>
+</body>
+</html>

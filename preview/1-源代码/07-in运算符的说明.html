@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// in 在.. 内部
+		// 语法: 属性 in 对象
+		// 作用: 用来判断对象能不能访问到这个属性,如果能够访问到就是true,否则就是false
+		// 注意： 只要存在该属性，不管属性的值 是什么，返回值都是：true
+
+		var obj = {
+			age : 18,
+			num: undefined
+		};
+
+		// age 是一个字符串
+		// console.log("age" in obj);
+		// console.log("age1" in obj);
+		// console.log("toString" in obj); // true
+
+		// 判断对象有没有属性
+		// console.log("num" in obj);
+
+		// // if(obj.num) { // 如果 num 的值是： null / undefined / 0 / false / NaN / ""
+		// if("num" in obj) { 
+		// 	console.log("存在")
+		// } else {
+		// 	console.log("不存在")
+		// }
+
+		// console.log(obj.toString())
+
+		// 判断数组，用来判断数组的索引号是否在数组中
+		// var arr = [1];
+		// // console.log(1 in arr);
+		// console.log(0 in arr);
+		
+		// 面试题
+		// 知道： 声明的所有全局变量都是作为 window 的属性存在的
+		// 		  比如：声明的变量a，就是作为 window 的一个属性，所以，通过
+		// 		  in运算符获取到的值就是 true
+		// var a = 10;
+		var a;
+		if("a" in window) {
+			alert("呵呵");
+		} else {
+			alert("不存在");
+		}
+	</script>
+</body>
+</html>

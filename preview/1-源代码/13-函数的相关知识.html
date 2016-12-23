@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 创建函数的三种方式：
+		// 1 函数表达式
+		// 		var fn = function() {};
+		// 2 函数声明
+		// 		function fn1() {}
+		// 3 通过 new Function
+		// 		var fn2 = new Funtion();
+
+		// 函数表达式与函数声明有什么区别？
+		// 如果是函数声明方式创建的函数，不管是在声明之前还是之后，都可以调用函数
+		// fn();
+		// function fn() {
+		// 	console.log(123);
+		// }
+		// fn();
+
+
+		// JS执行的过程：
+		// 1 预解析
+		// 		变量提升和函数提升, 提升的只是：声明
+		// fn();
+		// var fn = function() {};
+		// 相当于：
+		// var fn;
+		// fn = function() {};
+
+		// 2 一行一行的执行代码
+
+
+		// 函数参数的问题：
+		// 		函数的形参个数 跟 实参的个数 可以是不同的
+		/*var fn = function() {
+
+		};
+
+		fn(1, "abc", true);
+
+		var fn1 = function(name, age) {
+
+		};
+
+		fn1();*/
+
+		// 怎么理解函数参数？？
+		// 		可以把函数的参数当作是函数内部的局部变量！
+
+		// 函数参数的顺序是要对应的！
+		// 如果函数的参数个数有很多个，此时应该使用 对象参数 代替！
+		/*var fn1 = function(name, age) {
+
+		};
+
+		fn1(undefined, 19);*/
+
+
+		// 使用对象参数
+		var fn1 = function(obj) {
+			// 此时，obj就是一个对象，如果想要使用函数的参数，应该是
+			// 通过反问 对象obj 的属性来获取！
+			// console.log(obj.age);
+
+			console.log(obj);
+		};
+
+		// fn1({age: 19});
+		fn1(); // undefined
+
+		// 声明变量，但是没有赋值！
+		var a;
+		console.log(a); // undefined
+
+
+		// 练习：写一个函数打印一段文字，要求：传入什么内容，就打印什么内容
+		// 		如果没有传入参数，就打印： 请传入参数！
+
+	</script>
+</body>
+</html>
