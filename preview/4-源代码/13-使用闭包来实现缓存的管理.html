@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 缓存应该有哪些限制:
+		// 1 缓存不能无限大, 缓存中存储的数据的数量应该在一个指定的范围之内
+		// 		假设, 缓存的最大数量是: 50 个
+		// 2 如果存储的数量超过了缓存的最大存储数量, 一般都是将最先存入的数据移除
+		// 		再把最新的数据存储
+
+		// 实现一个函数,用来创建缓存
+		// 缓存的功能: 增删改查
+		var createCache = function() {
+			// 创建一个变量,用来充当缓存,存储数据
+			// var cache = {};
+			var cache = {};
+
+			// 因为对象存储的键值对是没有顺序的,但是因为删除数据需要顺序
+			// ,所以应该依赖一个数据
+			// 这个数组只用来存储, 缓存中的key
+			var keyArr = [];
+
+			// 因为数组是由长度的,所以,就不用变量了!
+			// // 创建一个变量, 用来存储缓存中的数量
+			// var count = 0;
+
+			return function(key, value) {
+				// 思路: 按照传入参数的个数,区分是存储数据还是获取数据
+				// 1 先判断传入参数的个数
+				// 	1.1 如果传入了一个参数,表示获取
+				// 	1.2 如果传入了两个参数,表示设置(增加/修改/删除)
+				if(arguments.length === 1) {
+					// 说明只有一个参数
+					return cache[key];
+				}
+
+				// 以下情况,就是设置的情况
+				// 2 如果存在, 直接修改就可以了
+				// 问题: 什么情况下,就表示缓存中存在数据?
+				// if(cache[key] !== undefined) {
+				if(key in cache) {
+					cache[key] = value;
+				} else {
+					// 3 如果不存在, 又分为两种情况
+					// 	3.1 缓存中存储的长度,没有超过最大值
+					// 	3.2 缓存中存储的长度,超过了最大值
+
+					if(keyArr.length >= 3) {
+						// 	3.1 缓存中存储的长度,没有超过最大值
+
+						// 此时,说明缓存中的数量以达到最大值,需要删除数据
+						// 问题: 如何删除数组中的第一个元素?
+						var deleteKy = keyArr.shift();
+						// 把key对应的缓存中的数据删除掉
+						delete cache[deleteKy];
+
+						// 删除掉数据之后,再添加数据
+						cache[key] = value;
+						// 给数组中添加新的key
+						keyArr.push(key);
+					} else {
+						// 	3.2 缓存中存储的长度,超过了最大值
+
+						// 删除掉数据之后,再添加数据
+						cache[key] = value;
+						// 给数组中添加新的key
+						keyArr.push(key);
+					}
+				}
+
+
+			};
+		};
+
+		// // 可以使用以上函数来创建多个缓存, 并且缓存之间是不能够相互影响的!
+		// var bf = createCache();
+		// var gf = createCache();
+
+		// otherF 是一个缓存, 可以用来添加缓存数据,也可以用来读取缓存数据
+		var otherF = createCache();
+		
+		// 存储函数
+		otherF("name-1", "小红 - 1");
+
+		otherF("name-2", "小红 - 2");
+
+		otherF("name-3", "小红 - 3");
+		console.log(cache);
+
+		/*otherF("name-4", "小红 - 4");
+		console.log(cache);*/
+
+		// // 获取
+		// var friend = otherF("name-2");
+		// console.log(friend);
+
+		// 修改
+		otherF("name-1", "小红 - 11");
+		var friend = otherF("name-1");
+		console.log(friend);
+	</script>
+</body>
+</html>

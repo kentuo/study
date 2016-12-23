@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 成员:包括属性和方法
+		// 
+		// 静态成员: 通过构造函数能够直接访问到的属性或方法,就叫做:静态成员
+		// 
+		// 实例成员: 通过实例对象能够访问到的属性或方法,就叫做: 实例成员
+		// 			 包括: 1 对象自身的属性
+		// 			 	   2 原型对象(原型链中所有的) 的属性和方法
+		// 			 
+		// 		实例: 由构造函数创建出来的对象叫做实例!
+
+		// 实例成员的例子:
+		/*var Person = function() {
+			this.name = "小明";
+			this.age = 19;
+		};
+		Person.prototype = {
+			say: function() {
+				console.log("饿了吗? 困吗?")
+			}
+		};
+		var p = new Person();
+
+		// 此处的name属性就是: 实例成员
+		console.log(p.name);
+		console.log(p.age);
+		p.say();*/
+		
+		// 静态成员的例子:
+		/*var Person = function() {};
+
+		// length属性就是一个静态成员!
+		console.log(Person.length);
+		console.log(Person.name);*/
+		
+		// 规则: 如果静态成员与实例成员需要一个相同作用的函数,
+		// 		 推荐的做法: 给静态成员添加这个方法,然后实例成员直接调用静态成员的方法!
+
+		var fn = function() {};
+
+		// 1 如果给静态成员和实例成员分别提供一份,那么将来需要维护两份代码
+		// 		不利于维护,所以 不推荐这种做法!
+		// 给函数fn添加一个静态成员
+		/*fn.each = function() {
+			// 对数据进行遍历操作
+			for(var i = 0; i < 10; i++) {
+				console.log("当前的i值为: " + i);
+			}
+		};
+
+		// 添加了一个实例成员!
+		fn.prototype.each = function() {
+			// 对数据进行遍历操作
+			for(var i = 0; i < 10; i++) {
+				console.log("当前的i值为: " + i);
+			}
+		};*/
+
+		// 这样做, 只维护了一份代码!
+		
+		fn.each = function() {
+			// 对数据进行遍历操作
+			for(var i = 0; i < 10; i++) {
+				console.log("当前的i值为: " + i);
+			}
+		};
+
+		// 添加了一个实例成员!
+		// fn.prototype.each = function() {
+		// 	fn.each();
+		// };
+		fn.prototype.each = fn.each;
+
+		var f = new fn();
+		f.each();
+		
+	</script>
+</body>
+</html>

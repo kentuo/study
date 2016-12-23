@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		(function(w) {
+		    // 独立的环境
+		    function itcast() {
+		    	console.log("msg");
+		    }
+		    itcast.prototype.say = function() {};
+		    
+		    // 其他操作代码
+		    // ...
+
+		    // 暴露到全局环境中
+		    w.i$ = itcast;
+
+		    // 将 window 作为参数，传入的原因：
+		    // 1 减少了作用域链的查找
+		    // 2 有利于代码压缩
+
+		    // window.$ = itcast;
+		})(window);
+		// }).call(this);
+
+		// underscore.js 中使用 call(this) 来代替传入 window 参数
+
+		// itcast();
+		i$();
+	</script>
+</body>
+</html>

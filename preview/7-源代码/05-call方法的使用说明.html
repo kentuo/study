@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// call / apply 作用相同
+		// 唯一不同的地方就是：apply的第二个参数是一个数组或者伪数组
+		// call 方法除了第一个参数以为，其他的参数都作为 被调用方法的参数存在
+		function fn(num1, num2, num3) {
+			console.log(num1, num2, num3);
+		}
+		fn.apply(null, [1, 6, 9]);
+		fn.call(null, 1, 6, 9);
+		
+		// call 和 apply作用是相同的，所以，使用哪一个方法都可以！
+		// 一般情况下，如果被调用的函数只有一个参数，此时，我们使用call会更加方便一些
+		// fn.call(null, 1);
+		// fn.apply(null, [1]);
+	</script>
+</body>
+</html>

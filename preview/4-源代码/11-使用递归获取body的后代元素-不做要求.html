@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		// 获取body的所有后代元素
+		
+		// 写一个获取子代元素的方法
+		var find = function(node) {
+			var list = [];
+
+			// 1 先获取到node的所有子节点
+			var cNodes = node.childNodes;
+			// 2 循环遍历所有的子节点，判断是否符合要求
+			for(var i = 0; i < cNodes.length; i++) {
+				// 3 判断当前节点是不是元素节点
+				// nodeType 这个属性用来判断节点的类型
+				// 1 表示：元素节点
+				// 2 属性节点
+				// 3 文本节点
+				if(cNodes[i].nodeType === 1) {
+					// 如果符合要求，就说明是一个元素节点
+					list.push(cNodes[i]);
+					
+					// 此处，temp就是一个数组
+					var temp = find(cNodes[i]);
+					// 将temp与list合并
+					list = list.concat(temp);
+				}
+			}
+			
+			return list;
+		};
+
+		window.onload = function() {
+			// 调用
+			var list = find(document.body);
+
+			// 给所有获取到的元素添加边框
+			for(var i = 0; i < list.length; i++) {
+				list[i].style.border = "1px solid black";
+			}
+		};
+		
+	</script>
+</head>
+<body>
+	<div>
+		<span>你好，我是小明！</span>		
+		<span>你好，我是小明！</span>		
+		<span>你好，我是小明！</span>		
+	</div>
+	这是文本节点
+	<div>
+		<ul>
+			<li>这是第1个li元素</li>
+			<li>这是第2个li元素</li>
+			<li>这是第3个li元素</li>
+			<li>这是第4个li元素</li>
+			<li>这是第5个li元素</li>
+		</ul>
+	</div>
+	<div>
+		<h1>这是大标题</h1>
+		<p>辣眼睛</p>
+		<p>辣眼睛</p>
+		<p>辣眼睛
+			<span>这是span元素 <a href="##">a标签！！！</a></span>
+		</p>
+	</div>
+</body>
+</html>

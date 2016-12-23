@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		var num = 123;
+
+		var Foo = function() {
+			var num = 456;
+		};
+		// 说明方法 getName 是 1级别
+		Foo.getName = function() {
+			console.log(num);
+		}
+
+		Foo.getName();
+
+		var a = 1 + 3 * 4;
+		console.log(a);
+	</script>
+</body>
+</html>

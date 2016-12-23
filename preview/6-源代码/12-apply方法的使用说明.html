@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// call/apply 调用方式，也可以叫做：借用方法调用模式
+		// （或者 上下文调用模式）
+
+		// call 或者 apply 就是一个方法！
+		// 作用：改变方法内部this的指向
+		// 
+		// 问题：其他三种函数的调用模式中，this的指向都是固定的！
+		// 1 在 函数调用模式中，this 指向了 window
+		// 2 在 方法调用模式中，this 指向了 调用当前方法的对象
+		// 3 在 构造函数调用模式中， this指向了 新创建出来的对象
+
+		// 使用 call/apply 这个方法，可以随意修改方法内部的 this 指向
+
+		// var fn = function() {};
+		// 语法： fn.apply(thisArg, 数组/伪数组);
+		// 本质上还是在调用 fn 这个函数！
+		// 
+		// 第一个参数： 表示函数内部this的指向，要求传入一个对象
+		// 				如果传入的参数不是一个对象，那么会在apply方法的内部
+		// 				将其转化为一个对象
+		// 第二个参数： 表示一个数组或者是伪数组，会把数组中每一项，作为
+		// 				被调用函数fn的参数
+		// 				其实，就是跟函数fn 传参数用的！
+		
+		// 实例：
+		var obj = {
+			name: "xiaoming"
+		};
+		
+		var fn = function(num1, num2) {
+			console.log(num1);
+			console.log(num2);
+
+			console.log(this);
+		};
+		// fn(); // 原来固定的，函数内部的this 只能是window
+		fn.apply(obj, [123, 456]);
+	</script>
+</body>
+</html>

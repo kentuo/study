@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		/*var Fn = function() {};
+		var f = new Fn();
+
+		// 1 先把Fn当做是 构造函数 看待
+		// 		作用：用来创建实例对象
+		console.log(Fn.prototype === f.__proto__);
+		console.log(Fn.prototype.constructor === Fn);
+
+		// Fn.prototype 和 Object.prototype
+		console.log(Fn.prototype.__proto__ === Object.prototype);
+		console.log(Object.prototype.__proto__ === null);
+
+		// 2 把 Fn 当作一个函数对象 看待
+		// 		所有的函数都可以看作是Function的实例
+		// var Fn = new Function();
+		console.log(Fn.__proto__ === Function.prototype);
+		console.log(Function.prototype.constructor === Function);
+		// 将Function当作一个函数对象来看待
+		console.log(Function.__proto__ === Function.prototype);
+
+		// 3 因为 Object 是系统提供的一个函数
+		// 		也可以把这个函数当作构造函数来看待
+		// 		也可以把这个函数当作函数对象来看待
+		var obj = new Object();
+		console.log(obj.__proto__ === Object.prototype);
+		console.log(Object.prototype.constructor === Object);
+
+		// 把Object当作对象来看待
+		console.log(Object.__proto__ === Function.prototype);
+		*/
+	
+		// arguments
+		// 作用： 用来实参列表
+		// 本质上是一个伪数组！
+		// 
+		// 具有属性：
+		// 1 length 用来返回实参列表的个数
+		// 2 callee 用来获取到当前函数的引用
+
+		// 伪数组：只要是一个对象，并且这个对象具有一个length属性，并且
+		// 		length属性的值 大于等于0，就认为这个对象是一个伪数组！
+		// 		
+		// 		如果伪数组中有内容，此时，这个对象中的键应该是：数字
+		// 		或者就直接当作数组来使用即可！
+		// 		
+		
+		// 创建伪数组
+		var obj = {
+			length: 0
+		};
+		obj[0] = "萝卜";
+		obj[1] = "青菜";
+		obj.name = "各种菜！";
+		// 长度是不会自动增加的，所以， 需要手动设置！
+		obj.length = 3;
+
+		// 当作伪数组来使用， 只会打印出数字索引对应的值
+		// 而其他的属性，是不回被打印出来的！
+		// for(var i = 0; i < obj.length; i++) {
+		// 	console.log(obj[i]);
+		// }
+		// 当作对象来使用！
+		for(var k in obj) {
+			console.log(obj[k]);
+		}
+
+		// 静态成员：构造函数能够直接访问到的属性或者方法
+		// 实例成员：实例对象能够访问到的属性或方法
+		var Dog = function() {
+			this.type = "泰迪";
+		};
+
+		var d = new Dog();
+
+		// 静态方法
+		// 给狗添加一个方法
+		Dog.aoao = function() {
+			console.log("嗷嗷叫唤！");
+		};
+		Dog.aoao();
+
+		// 将静态方法的引用交给原型中的aoao方法
+		Dog.prototype.aoao = Dog.aoao;
+
+		// 实例方法
+		d.aoao();
+	</script>
+</body>
+</html>

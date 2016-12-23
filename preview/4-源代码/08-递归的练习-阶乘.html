@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 阶乘
+		// n! = 1 * 2 * 3* .... * (n-1) * n
+		// 
+		// 1! = 1
+		// 2! = 1 * 2			==> 2! = 1! * 2
+		// 3! = 1 * 2 * 3		==> 3! = 2! * 3
+		// 4! = 1 * 2 * 3 * 4   ==> 4! = 3! * 4
+		// 
+		// n! = (n - 1)! * n;
+
+		
+		// 求阶乘的函数 fact
+		var jc = function(n) {
+			if(n === 1) {
+				return 1;
+			}
+
+			return jc(n - 1) * n;
+		};
+
+		// 调用：
+		console.log(jc(10));
+
+		// 思考：如何计算 n的m次方
+		// 2^3
+		// 8^4
+	</script>
+</body>
+</html>

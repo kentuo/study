@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 闭包的练习：
+		// 考察了对 setTimeout 的理解
+
+		for(var i = 0; i < 10; i++) {
+
+			setTimeout(function() {
+				console.log(i);
+			}, 0);
+		}
+
+		// 面试题1:
+		var a = 10;
+		// 第一个参数：表示回调函数
+		// 第二个参数：是一个时间长度，单位是毫秒
+		// 		理解： 至少要等到 指定的时间之后，才会执行回调函数！
+		setTimeout(function() {
+			console.log(a);
+		}, 100);
+
+		var d1 = new Date();
+		for(var i = 0; i < 100000000; i++) {
+			
+		}
+		var d2 = new Date();
+		console.log("使用的时间：" + (d2 - d1) );
+
+		a = 100;
+
+
+		// JavaScript是一门单线程的语言
+		// 对于单线程的理解： 同时只能干一件事情！
+
+		// 浏览器是多线程的：
+		// 跟前端相关的主要有三个线程：
+		// 1 JavaScript代码执行的主线程，作用：用来执行js中主线程中的代码
+		// 		除了 setTimeout 和 setInterval 以外的代码（ajax）
+		// 		执行到 setTimeout() 代码后，会把 回调函数 存储起来，放到了一个事件队列中
+		
+		// 2 渲染线程
+		// 		
+		// 
+		// 3 事件循环线程
+		// 
+		// 1 和 2 两个线程是不会同步执行的！
+
+	</script>
+</body>
+</html>

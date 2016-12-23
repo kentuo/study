@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		/*var num = 456;
+
+		function f() {
+		    num = 678;
+
+		    function foo() {
+		        var num = 999;
+		        console.log(num); // 999
+		    }
+
+		    foo();
+		    console.log(num); // 
+		}
+		f();*/
+
+		// var num;
+		// function f() {
+		//     num = 678;
+
+		//     function foo() {
+		//     	var num;
+
+		//         num = 999;
+		//         console.log(num); // 999
+		//     }
+		//     foo();
+		//     console.log(num); // 678
+		// }
+
+		// num = 456;
+		// f();
+
+		
+		// 2
+		/*var num = 123;
+		function f1() {
+		    console.log(num);
+		}
+
+		function f2() {
+		    var num = 456;
+		    f1();
+		}
+
+		f2();*/
+		
+		
+		// 查看函数作用域的时候，只看函数是在哪个位置声明的
+		// 而不管，这个函数是在哪调用的！
+		var num;
+		// f1 的作用域链包含： f1函数自身 -> 全局作用域
+		function f1() {
+		    console.log(num);
+		}
+		
+		function f2() {
+			var num;
+
+		    num = 456;
+		    f1();
+		}
+
+		num = 123;
+		f2();
+	</script>
+</body>
+</html>

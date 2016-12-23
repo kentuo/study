@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 学习闭包就是要想办法在函数形成的闭包的外部来访问到内部的变量！
+
+		/*function fn() {
+			// var num = 123;
+			var num = Math.random();
+
+			return num;
+		}
+
+		// 1
+		var num1 = fn();
+		// 2
+		var num2 = fn();
+
+		// 问题：两次获取的值是同一个值吗？
+		console.log(num1 === num2);*/
+
+		// 但是，我们现在要解决的事情就是要获取多次，并且还是要获取到相同的值！
+		// 那怎么办？
+		// 
+		// 为什么以上两个值是不同值？ 就是因为：fn这个函数调用了两次
+		// 并且每一次调用，函数内部的代码都会重新执行一遍！也就是每次都会产生一个新的随机数
+		// 那想要获取到的值是同一个值：只需要保证fn函数只调用一次就可以了！
+
+		function fn() {
+			var num = Math.random();
+
+			return function() {
+				return num;
+			};
+		}
+		
+		// fn函数的返回值：也是一个函数（fn1）
+		// 虽然，函数调用已经结束了，但是因为返回的函数的作用域链中包含了
+		// 函数fn的作用域，所以，此时，函数fn所占用的那块内存，还在内存中占用着！
+		// 
+		// 	其实，也说明了使用闭包会占用更多的内存！
+		// 	所以，只在必须使用闭包的情况下，再来使用闭包！不要滥用！！！
+		var fn1 = fn();
+
+		// 获取多次值
+		var num1 = fn1();
+		var num2 = fn1();
+		console.log(num1 === num2);
+
+
+
+		// 因为num这个变量是在函数内部声明的一个局部变量，函数形成了一个闭包，对num起到了保护的
+		// 作用，所以，在函数的外部无法访问到 num 的值！
+		// 并且访问num的时候，会报错！
+		// console.log(num);
+
+		// 问题：再函数外部能够访问到 num1 和 num2，并且要保证多次获取的值相同！
+		var foo = function() {
+			var num1 = Math.random()
+			var num2 = Math.random()
+			
+		};
+	</script>
+</body>
+</html>

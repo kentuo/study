@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 使用 apply 模拟方法调用模式：
+		/*var obj = {
+			name: "xiaoming"
+		};
+		
+		// 函数
+		var fn = function(num1, num2) {
+			console.log(num1);
+			console.log(num2);
+
+			console.log(this);
+		};
+
+		// 相对于给对象添加一个方法，要更加灵活！
+		// obj.say = fn;
+		// obj.say();
+		// fn.apply(obj, [123, 456]);
+
+		var obj2 = {
+			age: 19
+		};
+		fn.apply(obj2, [11, 22]);*/
+
+		// 模拟 函数调用模式
+		var obj = {
+			say: function(num1, num2) {
+				console.log(num1);
+				console.log(num2);
+				console.log(this);
+			}
+		};
+		
+		// 原始模拟函数调用模式的方法
+		// var fn = obj.say;
+		// fn(1, 2);
+		// 
+		// 以下几种方式都可以！！！
+		// obj.say.apply(window, [999, 666]);
+		// obj.say.apply(undefined, [999, 666]);
+		obj.say.apply(null, [999, 666]);
+	</script>
+</body>
+</html>

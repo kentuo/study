@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 沙箱: 模拟了一个真实环境
+		// 沙箱中的操作是不会影响到外界环境的!
+
+		// 沙箱模式, 本质上就是一个自调用函数!
+		// 其实使用沙箱模式的目的就是为了: 模拟创建一个私有环境!
+		// 
+		// 沙箱模式为什么要使用自调用函数? 保证不会造成全局污染!
+		// 为什么要使用函数? 因为函数能够形成一个作用域!
+
+		// 推荐:
+		// 将所有的js代码都放到一个沙箱中
+		
+		(function() {
+			var num = 123;
+
+		})();
+		// console.log(num);
+
+		// 因为这种形式又创建了一个没用的全局变量!
+		// var fn = function() {
+		// 	var num = 1231;
+		// };
+		// fn();
+
+
+		// (function() {
+		// 	var num = 123;
+			
+		// })();
+	</script>
+</body>
+</html>

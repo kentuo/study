@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// Function中的成员说明:
+		var fn1 = function() {
+			console.log("测试");
+			console.log(fn1.caller === foo);
+		};
+
+		// 1 name 属性
+		// 获取当前函数的名字
+		// console.log(fn1.name);
+
+		// 2 length 属性
+		// 作用: 用来获取形参的个数
+		// console.log(fn1.length);
+
+		// 3 caller 属性
+		// 作用: 用来获取调用当前函数的引用
+		// 		也就是: 查看当前函数是在哪个函数中被调用的
+		// 		要查看哪个函数,就在哪个函数中查看该属性!
+		// console.log(fn1.caller); // null
+		// var foo = function() {
+		// 	fn1();
+		// };
+		// foo();
+
+
+		// 4 arguments
+		// 作用: 用来获取当前函数的实参列表
+		// 注意: 每一个函数中都有一个 arguments 
+		// 		 arguments只能在函数内部使用!
+		// 
+		// arguments 是一个伪数组! 像数组的对象
+		// 使用的形式跟数组相同: 
+		// 1 可以使用 [index] 来访问对象中的成员
+		// 2 可以使用for来对其进行遍历
+		// 
+		// arguments.length 作用: 用来获取实参的个数
+		// 如何判断函数调用时, 传入参数的个数是正确的:?
+		// if( fn.length !== arguments.length) {
+		// 	console.log("您传入的参数个数不正确!");
+		// }
+		// var fn = function(num1, num2) {
+		// 	if( fn.length !== arguments.length) {
+		// 		console.log("您传入的参数个数不正确!");
+		// 	}
+		// };
+		// fn(1, 9, 10);
+		// 
+		// 
+		// arguments.callee 作用: 用来获取当前函数的引用, 即:函数自身
+		// 		在递归中可能会用到 arguments.callee 用来调用自己!
+
+		// var fn = function() {
+		// 	console.log(arguments.callee === fn);
+		// };
+		// fn();
+
+		// 在匿名函数中,因为当前函数没有名字,但是如果想要调用自身
+		// 需要使用 arguments.callee
+		(function () {
+			// arguments.callee
+		})();
+	</script>
+</body>
+</html>

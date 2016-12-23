@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div {
+			background-color: #def;
+		}
+	</style>
+</head>
+<body>
+	<div>老司机带带我 <span>这事div内部的span</span></div>
+
+	<script type="text/javascript">
+		// 沙箱模式
+		// 自调用函数： 立即执行的函数表达式（IIFE）
+		// 				Immediately-invoked function expression
+
+		// var itcast = {};
+		// 
+		/*(function(w) {
+			// 所有的js代码，都放到
+			// 一个自调用函数中！
+
+			// window
+			// w
+
+			var Person = function() {};
+			Person.prototyep = {};
+			
+			// w.Per = Person;
+			w.itcast.Per = Person;
+		})(window);*/
+
+		/*(function(w) {
+			// 所有的js代码，都放到
+			// 一个自调用函数中！
+
+			// window
+			// w
+
+			var Student = function() {};
+			Student.prototyep = {};
+			
+			/// w.Stu = Student;
+			w.itcast.Stu = Student;
+		})(window);*/
+
+		// 沙箱模式的主要作用：隔离，将函数内部的变量隔离到一个独立的环境中
+		// 在JavaScript中只有函数才能形成作用域
+		// 函数需要被调用才会执行
+		// 
+		// 为什么要将 window 作为参数，传给函数？
+		// 1 有利于代码压缩
+		// 2 减少使用 window 时的作用域搜索
+
+		// 避免全局污染的方式：
+		// 1 沙箱模式
+		// 2 命名空间（模块化）
+		// 		在 JavaScript 中是通过 对象 来模拟实现不同的命名空间
+
+		// 雅虎： YUI（UI库） 、jQueryUI、MiniUI、EasyUI
+
+		// 原来的方式，是吧所有的函数都放到全局环境中，这样会造成全局污染的问题
+		// 解决方式：就是将函数放到一个对象中，这个对象就是一个命名空间
+		
+		// var itcast = {
+		// 	// 获取元素的 命名空间
+		// 	elements: {
+		// 		id: function() {},
+		// 		tag: function() {}
+		// 	},
+		// 	// 操作样式的 命名空间
+		// 	style: {
+		// 		addClass: function() {},
+		// 		css: function() {}
+		// 	},
+		// 	// DOM操作的 方法
+		// 	// 再给 顶级itcast命名空间 添加一个二级的命名空间
+		// 	dom: {
+		// 		append: function() {},
+		// 		appendTo: function() {}
+		// 	}
+		// };
+		
+		// itcast 是我们自己实现的功能中的 顶级命名空间
+
+		// itcast.elements 就是一个命名空间，作用把功能相近的函数组织到一起
+		// itcast.elements.id()
+		// 
+		// itcast.style 是另外一个命名空间
+		// itcast.style.addClass()
+
+	</script>
+
+	<script>
+		// 闭包的应用:
+		var dv = document.getElementsByTagName("div")[0];
+
+		// 绑定事件的方式：
+		// 1 btn.onclick = function() {};
+		// 2 W3C规范：addEventListner(事件名称, 事件处理程序, useCapture)
+		// 				第三个参数如果是：true，表示捕获
+		// 						  如果是：false, 表示 冒泡
+		// 
+		// 3 IE中：   attachEvent("on" + 事件名称, 事件处理程序)
+		// 				这个方法不支持：捕获阶段， 只支持冒泡阶段！
+
+		// 事件的三个阶段：
+		// 1 捕获 
+		// 2 目标阶段 
+		// 3 冒泡
+
+		// 1 onclick 事件中的this 就是 				当前对象
+		// 2 addEventListener 事件处理程序中的this：当前对象
+		// 3 attachEvent 事件处理程序中的this ：    window
+
+		// 不同的绑定事件方式，事件处理程序内部的this是谁？
+		// dv.onclick = function() {
+		// 	console.log(this);
+		// };
+
+		// dv.addEventListener("click", function() {
+		// 	console.log(this);
+		// });
+
+		// dv.attachEvent("onclick", function() {
+		// 	console.log(this === window);
+		// });
+
+		// 绑定事件的兼容处理
+		// 这个函数的作用：用来实现添加事件的兼容性处理，目的：将来
+		// 在绑定事件的时候，只需要调用这个方法就可以了！不需要再考虑兼容性问题
+		// 
+		// 
+		// 第一个参数：绑定事件的对象
+		// 第二个参数：事件类型
+		// 第三个参数：事件处理程序
+		/*var addEvent = function(target, type, handler) {
+			if(target.addEventListener) {
+				target.addEventListener(type, handler);
+			} else if(target.attachEvent) {
+				target.attachEvent("on" + type, handler);
+			} else {
+				// 有可能有些浏览器以上两种绑定事件的方法都不支持
+				// 此时，就用on来代替
+				target["on" + type] = handler;
+			}
+		};*/
+
+		// 如果这样绑定事件处理代码，有什么缺点？
+		// 如果调用这个函数多次，那么函数内部的判断就会走多次
+		// 但是，这个判断 只进行一次就可以 确定浏览器是 支持哪个事件的！
+
+
+		// 这样做的好处：只判断了一次！
+		/*var addEvent = function() {
+			
+			// 判断的目的仅仅是为了判断浏览器是否支持这个放
+			// 不管是哪个对象的方法，只要是能找到这个放就行！
+			if(window.addEventListener) {
+
+				return function f1(target, type, handler) {
+					target.addEventListener(type, handler);
+				};
+			} else if(window.attachEvent) {
+
+				return function f2(target, type, handler) {
+					target.attachEvent("on" + type, function() {
+						handler.apply(target);
+					});
+				};
+			} else {
+
+				return function f3(target, type, handler) {
+					target["on" + type] = handler;
+				};
+			}
+		}();
+
+		addEvent(dv, "click", function() {
+			// alert(this.innerHTML);
+			alert(this);
+		});*/
+
+
+
+
+
+		/*// 优势：
+		// 浏览器能力检测只执行一次（执行一次就够了）
+		var addEvent = (function() {
+		    if (window.addEventListener) {
+
+		        return function(element, type, fn, capture) {
+		            element.addEventListener(type, fn, capture);
+		        };
+		    } else if (window.attachEvent) {
+
+		        return function(element, type, fn, capture) {
+		            element.attachEvent("on" + type, function(e) {
+		                fn.call(element, e);
+		            });
+		        };
+		    }
+		})();
+		// 使用
+		addEvent(dv, "click", function() {
+			alert(this.innerHTML);
+		});*/
+
+		// 默认情况下，IE8以及低版本的浏览中使用 attachEvent 绑定事件的时候
+		// 事件处理函数中的 this  是 window
+		// 我们写这个函数的目的：为了实现不同浏览器中绑定事件的兼容性问题
+		// 并且，事件处理程序中的 this 都指向 当前对象
+		// 不仅要实现 绑定事件 方法的兼容，还要保证 this 的指向问题
+		// 要改变 attachEvent 中的 this ，怎么改变？ 用 call 或者是 apply
+
+	</script>
+</body>
+</html>

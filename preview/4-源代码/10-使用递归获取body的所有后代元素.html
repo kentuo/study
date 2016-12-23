@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		// 获取body的所有后代元素
+		// 问题：不知道body中有多少层后代元素
+
+		// 虽然，获取不到所有的后代元素，但是可以获取到当前元素的子代元素
+		// node.childNodes 所有的节点都能够获取到 / node.children ==》元素节点
+		
+		// 已经将要获取所有后代元素的问题，化归为：获取某一个元素的子节点
+		// 然后，如果想获取所有的后代节点，只需要让当前子节点再来递归调用该方法即可！
+		
+		// 用来接受获取到的所有节点
+		var list = [];
+		
+		// 写一个获取子代元素的方法
+		var find = function(node) {
+			// 1 先获取到node的所有子节点
+			var cNodes = node.childNodes;
+			// 2 循环遍历所有的子节点，判断是否符合要求
+			for(var i = 0; i < cNodes.length; i++) {
+				// 3 判断当前节点是不是元素节点
+				// nodeType 这个属性用来判断节点的类型
+				// 1 表示：元素节点
+				// 2 属性节点
+				// 3 文本节点
+				if(cNodes[i].nodeType === 1) {
+					list.push(cNodes[i]);
+
+					// 只有元素节点才有子节点， 所以此时，需要调用find方法
+					// 实现递归获取所有的后代元素
+					find(cNodes[i]);
+				}
+			}
+		};
+
+		window.onload = function() {
+			// 调用
+			find(document.body);
+
+			// 给所有获取到的元素添加边框
+			for(var i = 0; i < list.length; i++) {
+				list[i].style.border = "1px solid black";
+			}
+		};
+		
+	</script>
+</head>
+<body>
+	<div>
+		<span>你好，我是小明！</span>		
+		<span>你好，我是小明！</span>		
+		<span>你好，我是小明！</span>		
+	</div>
+	这是文本节点
+	<div>
+		<ul>
+			<li>这是第1个li元素</li>
+			<li>这是第2个li元素</li>
+			<li>这是第3个li元素</li>
+			<li>这是第4个li元素</li>
+			<li>这是第5个li元素</li>
+		</ul>
+	</div>
+	<div>
+		<h1>这是大标题</h1>
+		<p>辣眼睛</p>
+		<p>辣眼睛</p>
+		<p>辣眼睛
+			<span>这是span元素 <a href="##">a标签！！！</a></span>
+		</p>
+	</div>
+</body>
+</html>

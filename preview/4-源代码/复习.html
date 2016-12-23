@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<textarea id="t"></textarea>
+	<script type="text/javascript">
+		// 面向对象案例-歌曲列表
+		// 优势：
+		// 		1 减少了全局污染
+		// 		2 使用对象将行为和数据整合到一起
+		// 		3 高层次的封装
+		// 		4 代码复用性更好
+		// 		5 使得代码的维护和管理变得方便
+		// 			项目的生命周期
+		// 		6 使用方式更加优雅
+
+		// 思路：
+		// 1 创建构造函数，配合new创建并初始化对象
+		// 		给对象添加歌曲的数据
+		// 2 将公共的方法（增删查）放到原型中
+		// 		实现方法的复用，减少内存的浪费
+		// 3 在方法内部使用 this 获得当前对象
+
+		
+
+		// new Function() 和 eval 的相同点：
+		// 1 参数都是字符串
+		// 2 将字符串当作代码来执行
+
+		// Function
+		// var fn = new Function("console.log('这是一个函数');");
+		// var fn1 = function() {
+		// 	console.log("asdfafsa");
+		// };
+		// fn();
+		
+		// eval
+		// eval("var num = 123;");
+		// // var num= 123;
+		// console.log(num);
+		// eval("document.body.style.background = '#abcdef'");
+		// document.getElementById('t').onkeyup = function() {
+		// 	var v = this.value;
+		// 	try {
+		// 		eval(v);
+		// 	} catch(e) {
+		// 		console.log(e);
+		// 	}
+		// };
+
+
+
+		// 应用场景：将 JSON格式的字符串 转化为 对象字面量
+		var str = '{"name": "jack", "age": 19}';
+		// 1 var obj = eval("(" + str + ")");
+		// 2 eval("var obj = " + str);
+		// 
+		// 使用 new Function 将 JSON 转化为 对象字面量
+		// var obj = ( new Function("return " + str) )();
+		// function fn () {
+		// 	return {"name": "jack", "age": 19};
+		// }
+		// var obj = fn();
+		// var obj = ( function() {return {"name": "jack", "age": 19};} )();
+		// 
+		// 区别：
+		// new Function() 会创建要给函数，所以会有作用域问题
+		// 考虑性能使用 eval
+		// 考虑安全使用 Function
+		// 
+		// 其实，效率都很慢！
+		
+
+
+		// 原型链
+		// 1 对象的原型链
+		// 2 函数的原型链
+		// 
+		// 不论哪个原型链描述的是：对象（实例）/构造函数/原型对象之间的关系
+		// 
+		// 
+		// 对象的原型链中：
+		// 将函数看作是 构造函数，其作用是用来创建对象（实例）
+		// 
+		// 函数的原型链中：
+		// 将函数看作是 对象 ，此时，函数看作是Function的实例
+		
+		// 对象的原型链：
+		// 构造函数：   Person
+		// 对象：		p
+		// 原型：		Person.prototype
+		// function Person() {}
+		// var p = new Person();
+
+		// 函数的原型链：
+		// 构造函数：	Function
+		// 对象：		Fn
+		// 原型：		Function.prototype
+		var Fn = new Function();
+		var f = new Fn();
+
+		var obj = new Object();
+
+
+
+		// instanceof 运算符
+		// 语法：对象 instanceof 构造函数
+		// 检测 构造函数的prototype属性的值是否在对象的原型链上
+		// 
+		var Person = function(name) {
+			this.name = name;
+		};
+		// 创建一个 jack 对象
+		var jack = new Person("jack");
+		console.log(jack instanceof Person); // 
+
+		// 修改 构造函数的prototype属性的值为 {}
+		Person.prototype = {};
+		var rose = new Person("rose");
+
+		console.log(rose instanceof Person); // 
+		console.log(jack instanceof Person); // 
+		
+	</script>
+	
+	<script type="text/javascript">
+		// 一个问题分析
+		var Person = function(name) {
+			this.name = name;
+		};
+		var p = new Person("Jack");
+		// 1
+		// p.sayHi(); // ?? 报错!
+
+		Person.prototype.sayHi = function() {
+			console.log("哈喽，我是：" + this.name);
+		};
+		// 2
+		p.sayHi(); // ?? 可以调用到!
+
+		// 修改原型的指向
+		var o = {
+			sayHello: function() {
+				alert("撒卧底卡");
+			}
+		};
+		Person.prototype = o;
+		// 3
+		// p.sayHello(); // ?? 报错!
+		p.sayHi();
+
+		var p1 = new Person();
+		// p1.sayHi(); // 报错!
+		p1.sayHello();
+	</script>
+</body>
+</html>

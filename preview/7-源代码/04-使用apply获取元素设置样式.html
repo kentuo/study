@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div,p {
+			height: 50px;
+			width: 400px;
+			background-color: hotpink;
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div>div</div>
+	<div>div</div>
+	<div>div</div>
+
+	<p>p</p>
+	<p>p</p>
+	<p>p</p>
+	<p>p</p>
+
+	<script type="text/javascript">
+		// 获取到页面中div元素和p元素 然后设置边框
+
+		// 1 获取到元素
+		// 2 使用for循环进行遍历
+
+		// document.getElementsByTagName("div")
+		/*var dvs = document.querySelectorAll("div");
+		for(var i = 0; i < dvs.length; i++) {
+			dvs[i].style.border = "5px solid green";
+		}
+		
+		var ps = document.querySelectorAll("p");
+		for(var i = 0; i < ps.length; i++) {
+			ps[i].style.border = "5px solid green";
+		}*/
+
+		// 想办法，让获取元素的结果进行合并
+		// 通过 querySelectorAll 获取到的结果也是：伪数组
+		var dvs = document.querySelectorAll("div");
+		var ps = document.querySelectorAll("p");
+
+		// 可以将以上两个伪数组中的内容 放到一个数组中
+		// var list = [];
+
+		// 这种调用方式，主要是用到了 apply 方法的第二个参数的功能
+		// 会将 数组或者伪数组中的元素，一个一个取出来作为被调用方法的参数存在
+		// 
+		// 也就是说明 push 方法，可以同时接受多个参数
+		// list.push(dvs[0], dvs[1], dvs[2]);
+		
+		/*[].push.apply(list, dvs);
+		[].push.apply(list, ps);*/
+		
+		// 不做要求！！
+		// [].slice.apply( ps ) 是将伪数组转化为 真数组
+		var list = [].concat.apply( [].slice.apply( ps ), dvs );
+
+		// console.log(list);
+		for(var i = 0; i < list.length; i++) {
+			list[i].style.border = "5px solid green";
+		}
+
+		// list.push( dvs );
+		// console.log(list);
+	</script>
+</body>
+</html>

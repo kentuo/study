@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 1 求最大值
+		var arr = [1, 8, 2, 6, 10, 4];
+
+		// 1 原始做法：使用for循环进行遍历，然后，比较，求最大值！
+		// 2 使用 apply 借用方法来求最大值：Math.max()
+		// 		Math.max(1,2,4,5,676,9);
+
+		// 主要是用到了 apply 方法，第二个参数的作用：
+		// 1 第二个参数是一个数组
+		// 2 会将数组中的每一项元素，拿出来作为被调用方法的参数
+		var maxNum = Math.max.apply(Math, arr);
+		console.log(maxNum);
+
+		// 2 将函数的参数用 "-" 链接起来
+		foo("how", "are", "you?");   // how-are-you?
+		foo("how", "old", "are", "you?");  // how-old-are-you?
+
+		function foo() {
+			// 通过 arguments 来获取到所有的实参列表
+			// arguments ==> ["how", "old", "are", "you?"] （可以这么理解）
+
+			// arguments 是无法直接调用 数组的方法，所以，此时是借用 方法！
+
+			// 数组中 join 方法，可以实现将数组中的元素进行链接的功能
+			// arr.join("-") 返回值：字符串
+			
+			// 借用 数组的join方法
+			// var ret = Array.prototype.join.apply(arguments, ["-"]);
+			var ret = [].join.apply(arguments, ["-"]);
+			console.log(ret);
+		}
+	</script>
+</body>
+</html>

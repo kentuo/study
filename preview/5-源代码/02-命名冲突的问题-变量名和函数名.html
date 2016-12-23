@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// var fn = 123;
+		// function fn() {}
+		// console.log(typeof fn);
+
+
+		// 对于作用域的面试题，第一步先要提升！
+		// 重复的声明无效！
+		/*var num = 123;
+		// var num = 456;
+		// num = 456;
+		var num; // 这句话可以被忽略掉
+
+		console.log(num);*/
+
+
+		// 1 
+		// 如果一个变量和函数同名了，此时变量没有赋值，那么访问这个变量
+		// 它的值就是：函数
+		var fn;
+		// var obj = {};
+		function fn() {}
+		console.log(typeof fn); // function
+
+		// 2
+		// 如果一个变量和函数同名了，此时变量赋值了，但是是在赋值之前就访问的这个变量的值
+		// 那么，它的值还是：函数
+		/*console.log(typeof fn);
+		var fn = 123;
+		function fn() {}*/
+
+		// var fn;
+		// function fn() {}
+		// console.log(typeof fn);
+		// fn = 123;
+
+		// 3
+		// 如果一个变量和函数同名了，此时变量赋值了，并且访问变量值的时候，已经给变量重新
+		// 赋值了，那么，它的值就是：变量
+		/*var fn = 123;
+		function fn() {}
+		console.log(typeof fn);*/
+		
+		// var fn;
+		// function fn() {}
+		// fn = 123;
+		// console.log(typeof fn); // number
+	</script>
+</body>
+</html>

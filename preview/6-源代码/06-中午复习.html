@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 面试题1的分析
+		/*var fn = function(num) {
+			// num 的值被设置为：0
+			// var a = num;
+			var a = 0;
+
+			return function() {
+				alert(a);
+			};
+		}(0);
+
+		var fn = function(num) {
+			// num 的值被设置为：1
+			// var a = num;
+			var a = 1;
+
+			return function() {
+				alert(a);
+			};
+		}(1);*/
+
+		// 第一个参数表示一个回调函数
+		// 第二个参数表示一个时间长度，至少要等 t1 时间之后，才会执行 callback 中的代码
+		// setTimeout(callback, 时间t1)
+		
+		// 1 JavaScript是一门单线程的语言
+		// 2 JavaScript运行的主线程 和 渲染线程，这两个线程是不能同时工作的！
+		// 		也就说：要么执行JavaScript代码，要么渲染页面
+		// 3 JavaScript三个常驻线程：
+		// 		3.1 执行JavaScript的主线程
+		// 		3.2 渲染线程
+		// 		3.3 事件循环线程
+		
+		// 面试题1:
+		var a = 10;
+		setTimeout(function() {
+			console.log(a); // 100
+		}, 0);
+		a = 100；
+	</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+	    // var Person = function() {};
+	    // Person.prototype.say = function() {
+	    // 	console.log(11231);
+	    // };
+	    // var p = new Person();
+
+	    // var Student = function() {};
+
+	    // // sut1 -> Student.prototype -> Object.prototype -> null
+	    // var stu1 = new Student();
+
+	    // Student.prototype = p;
+
+	    // // stu -> p -> Person.prototype -> Object.prototype -> null
+     //    var stu = new Student();
+     //    stu.say();
+
+
+
+        // 对象 instanceof 构造函数
+
+        // var fn = function() {};
+
+        // console.log(fn instanceof Function); // true
+        // console.log(fn instanceof Object);	 // true
+
+        // console.log(Function instanceof Function); // true
+        // console.log(Object instanceof Function);   // true
+        // console.log(Function instanceof Object);   // true
+
+
+          function Person() {
+          	// console.log("这是Person")
+          }
+		  function Student() {}
+		  var p = new Person();
+		  Student.prototype = p;
+		  var stu = new Student();
+		  // Person
+		  console.log(stu.constructor === Person);
+    </script>
+</body>
+
+</html>

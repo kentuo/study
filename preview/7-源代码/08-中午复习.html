@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		// 沙箱模式 和 命名空间
+		// 目的：保证整个项目中，在全局环境只有 itcast 一个变量！
+		var itcast = {};
+
+		// apply 和 call，作用完全相同
+		// 唯一的不同就是：apply和call的参数形式不一样
+		var fn = function(num1, num2) {
+			console.log(this);
+			console.log(num1, num2);
+			console.log("-------------");
+		};
+		var obj = {
+			age: 19
+		};
+
+		// 要求：让fn这个函数 模拟方法调用模式（obj）
+		/*fn.apply(obj);
+		fn.call(obj);*/
+
+		fn.apply(obj, [999, 666]);
+		fn.call(obj, 999, 666);
+
+		// 借用构造函数继承
+		var Person = function(name, age, gender) {
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		};
+
+		var Student = function(name, age, gender) {
+			// 学生是需要有 姓名、性别、年龄
+			// 要借用方法，本质上还是要给当前构造函数中的this来添加成员
+			// this.name = name;
+			// this.age = age;
+			// this.gender = gender;
+
+			// 函数调用模式，此时，函数内部的this指向了 window
+			// Person(name, age, gender);
+			Person.call(this, name, age, gender);
+		};
+
+		var stu = new Student("老邓", 23, "男");
+
+		var Employee = function() {
+			// 员工是需要有 姓名、性别、年龄
+			Person.call(this, name, age, gender);
+		};
+		
+		// 严格模式
+		// 开启："use strict";
+		// 执行的效率会提高！
+		// 一般情况下，要在某一个函数中使用 严格模式 ！
+	</script>
+	<script type="text/javascript" src="Person.js"></script>
+	<script type="text/javascript" src="Student.js"></script>
+	<script type="text/javascript">
+		var p = new window.itcast.Per();
+		console.log(p);
+	</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 缓存使用的基本步骤:
+		// 1 先去缓存中查看有没有对应的值
+		// 2 如果有就直接拿过来或私用
+		// 3 如果没有, 先去计算, 然后将计算的结果放到缓存中
+
+		// 在js中一般使用数组或对象来充当缓存!
+		// 往缓存中存储数据的时候, 要以键值对的形式进行存储
+		// 从缓存中取数据的时候, 要根据存入数据时候的键取到相应的数据!
+
+		var count = 0;
+		// cache就是一个缓存
+		var fib = function() {
+			// 使用数组充当缓存
+			var cache = [];
+
+			// 注意: 返回的函数才是计算菲波那契数列的函数
+			return function (n) {
+				count++;
+				// 1 先查看缓存 cache 中有没有n对应的数据
+				// 		如果有,就直接返回
+				if(cache[n] !== undefined) {
+					// 此时,说明缓存中存在 n 对应的数据
+					return cache[n];
+				}
+
+				// 2 缓存中没有n对应的数据, 就先计算结果,然后将计算的结果
+				// 放到缓存中,然后再返回!
+				// 2.1 如果是0或者1, 此时的值就是1
+				if(n === 0 || n === 1) {
+					// 直接将固定的值存储到缓存中
+					cache[n] = 1;
+					// return cahce[n];
+					return 1;
+				}
+
+				var tempNum = arguments.callee(n - 1) + arguments.callee(n - 2);
+				// 一定是先放到缓存中,再返回!
+				cache[n]  = tempNum;
+				return tempNum;
+			};
+		};
+
+		var fn = fib();
+		var num = fn(100);
+		// console.log(count);
+
+		/*count = 0;
+		fn(99);
+		console.log(count);*/
+
+		count = 0;
+		fn(101);
+		console.log(count);
+
+
+
+
+		// console.log(num);
+
+		// var num = fib(10);
+
+
+		/*var cahce = [];
+
+		var fib = function(n) {
+			count++;
+			if(n === 1 || n === 0) {
+				return 1;
+			}
+
+			return fib(n - 1) + fib(n - 2);
+		};*/
+	</script>
+</body>
+</html>

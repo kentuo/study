@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 面试题1:
+		/*var age = 38;
+		var obj = {
+		    age: 18,
+		    getAge: function() {
+		        console.log(this.age);
+		    }
+		};
+
+		obj.getAge(); // 18
+
+		// 变式：
+		var fn = obj.getAge;
+		fn();	// 38*/
+
+		// 2
+		/*var age = 38;
+		var obj = {
+		    age: 18,
+		    getAge: function() {
+
+		        // console.log(this.age);
+		        var fn = function() {
+		        	console.log(this.age);
+		        };
+		        // 因为 函数fn 是作为函数来调用的，所以，函数内部的this 指向了window
+		        fn();
+		    }
+		};
+
+		obj.getAge();  // 38 */
+		
+		var age = 38;
+		var obj = {
+		    age: 18
+		};
+
+		var getAge = function() {
+	        console.log(this.age);
+	    };
+
+	    obj.get = getAge;
+	    // 因为这个函数是作为对象的方法来调用的，所以，方法内部的this就是obj
+	    obj.get(); // 18
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 问题：再函数外部能够访问到 num1 和 num2，并且要保证多次获取的值相同！
+
+		/*var foo = function() {
+			var num1 = Math.random();
+			var num2 = Math.random();
+			
+			// 可以返回数组或者对象
+			return {
+				get_num1: function() {
+					return num1;
+				},
+				get_num2: function() {
+					return num2;
+				}
+			};
+		};
+
+		// fn 是一个对象，对象中包含了两个方法
+		var obj = foo();
+		// 获取num1的值
+		console.log(obj.get_num1());
+		// 获取num2的值
+		console.log(obj.get_num2());
+
+		// 获取num1的值
+		console.log(obj.get_num1());
+		// 获取num2的值
+		console.log(obj.get_num2());*/
+
+		// 使用闭包来模拟私有变量！
+		// 实现数据的读取和设置
+		
+		function fn() {
+			var num = Math.random();
+
+			return {
+				getNum: function() {
+					return num;
+				}
+				,
+				setNum: function(value) {
+					num = value;
+					// return num;
+				}
+			};
+		}
+
+		// 使用
+		var foo = fn();
+		// 获取值
+		console.log(foo.getNum());
+		// 设置值
+		foo.setNum(999);
+		// 获取值
+		console.log(foo.getNum());
+
+
+
+		// 使用数组：
+		/*var foo = function() {
+			var num1 = Math.random()
+			var num2 = Math.random()
+			
+			// 可以返回数组或者对象
+			return [
+				function() {
+					return num1;
+				},
+				function() {
+					return num2;
+				}
+			];
+		};
+
+		// fn 是一个对象，对象中包含了两个方法
+		var obj = foo();
+		// 获取num1的值
+		console.log(obj[0]());
+		// 获取num2的值
+		console.log(obj[1]());
+
+		// 获取num1的值
+		console.log(obj[0]());
+		// 获取num2的值
+		console.log(obj[1]());*/
+	</script>
+</body>
+</html>

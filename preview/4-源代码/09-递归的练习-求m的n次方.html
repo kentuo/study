@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 案例： 求m的n次方
+		// m^n, 任何数值的0次方都是1
+		// 假设求： 2的4次方
+		// 2^0 = 1					
+		// 2^1 = 1 * 2				==> 2^1 = 2^0 * 2
+		// 2^2 = 1 * 2 * 2			==> 2^2 = 2^1 * 2
+		// 2^3 = 1 * 2 * 2 * 2		==> 2^3 = 2^2 * 2
+		// 2^4 = 1 * 2 * 2 * 2 * 2  ==> 2^4 = 2^3 * 2
+		// ....
+		// 2^n = 2^(n - 1) * 2
+		// 如果是要求 m的n次方
+		// 
+		// m^n = m^(n - 1) * m
+
+		
+		// 求 m 的n次方
+		var pw = function(m, n) {
+			// 临界值： n为0的时候，返回值为：1
+			if(n === 0) {
+				return 1;
+			}
+
+			return pw(m, n - 1) * m;
+		};
+
+		console.log(pw(2, 10));
+	</script>
+</body>
+</html>

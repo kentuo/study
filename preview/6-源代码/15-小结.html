@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+	
+		// 1 setTimeout的问题 （requestAnimationFrame）
+		// 2 沙箱模式的其他说明
+		// 		如何在沙箱外部来访问到沙箱内部的代码？
+		// 		解决方式：想把哪一个对象/函数，对外开放出来，就把哪个对象或函数
+		// 				  添加为 window一个属性的值
+		// 				  window.i$ = itcast;
+		// 3 函数的四种调用模式
+		// 		3.1 函数调用模式 						===> this === window
+		// 		3.2 方法调用模式						===> this === 调用方法的对象
+		// 		3.3 构造函数调用模式					===> this === 新创建出来的对象
+		// 		3.4 借用方法调用模式（上下文调用模式）  ===> 想让方法内部的this是谁，就指定谁！
+
+		// apply的基本用法：
+		// fn.apply(对象, 数组/伪数组)
+		// 作用： 改变this的指向，借用方法
+		// 
+		// [].join.apply(arguments, ["---"])
+		// Array.prototype.join.apply(arguments, ["---"])
+		// 不管是 [].join 还是 Array.prototype.join 都是在找到要借用的方法！
+
+		// 4 缓存的应用
+		// 
+		// 5 JS中线程的问题
+	</script>
+</body>
+</html>

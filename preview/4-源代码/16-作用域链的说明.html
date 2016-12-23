@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		var a = 11;
+		function outer() {
+		    var num = 123;
+		    // 此处，访问不到 str 这个变量的！
+		    console.log(str);
+
+		    function inner() {
+		        var str = "abc";
+		        // 此处，可以访问到 num 这个变量！
+		        console.log(num);
+		    }
+		}
+		outer();
+		
+		
+		// 作用域链
+		// console.log(num); 这句代码是在：查找num这个变量
+		// 变量的查找是沿着作用域链进行查找的！
+		// 所以，如果想要看能不能访问到改变量的值，只需要知道函数的作用域链即可！
+
+		// inner函数的作用域链： inner函数的作用域 -> outer函数的作用域 -> 全局作用域
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 面试题：
+		var length = 10;
+		function fn(){
+		    console.log(this.length);
+		}
+		
+		var obj = {
+		    length: 5,
+		    method: function (fn1) {
+		        fn1();   // 10
+		        
+		        // arguments 是一个伪数组（对象）
+		        // arguments.length 表示的是： 实参的个数
+		        arguments[0](); // 2
+		    }
+		};
+
+		// 第一个参数 fn 表示：全局函数fn
+		obj.method(fn, 123);
+
+		// 如何访问对象的属性
+		var obj = {
+			say: function() {
+				console.log("蓝瘦");
+			}
+		};
+		// 调用方法
+		// 1 obj.say()
+		// 2 obj["say"]()
+
+		// obj.say();
+		// obj["say"]();
+
+		// 如何访问数组的成员：
+		// var arr = [ function() { console.log("香菇！"); } ];
+		var arr = [ function() { console.log(this === arr); } ];
+		// 访问数组中索引好为 0 的项，因为这以项就是一个函数，所以，直接就可以
+		// 使用小括号来调用！
+		arr[0]();
+
+		/*var fn = arr[0];
+		console.log(typeof fn);
+		fn();*/
+
+		// arr.0();
+
+		// 变量的命名规范： 数字、字母、下划线、$
+		// 不能以数字作为 变量命名的开头
+	</script>
+</body>
+</html>

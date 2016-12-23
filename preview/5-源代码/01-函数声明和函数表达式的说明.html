@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 函数声明和函数表达式的区别：
+		// 1 函数声明会把整个函数体提升到最前面
+		// 		function fn() {}
+		// 2 函数表达式只会把函数名字提升
+		// 		var fn = function() {}; 此时函数作为数据！
+
+		// 函数声明不能够出现在其他语句块中！
+		// 函数声明能够出现的位置：
+		// 1 全局环境中
+		// 2 其他函数内部
+
+		// 如果要根据不同的条件来创建不同的函数，需要在if-else中使用
+		// 函数表达式的形式来创建函数！
+		/*if(true) {
+			var fn = function() {
+				console.log(1);
+			};
+		} else {
+			var fn = function() {
+				console.log(2);
+			};
+		}*/
+
+		/*function fn() {
+			console.log(1);
+		}
+		function fn() {
+			console.log(2);
+		}*/
+		
+		// 不同的浏览器会解析为不同的结果！
+		if(true) {
+			function fn() {
+				console.log(1);
+			}
+		} else {
+			function fn() {
+				console.log(2);
+			}
+		}
+
+		fn();
+	</script>
+</body>
+</html>

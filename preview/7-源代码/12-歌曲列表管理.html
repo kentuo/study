@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.container {
+			margin: 100px auto;
+			width: 850px;
+			border: 1px solid #dad8d8;
+
+			/*height: 100%;*/
+		}
+		.songslist-main, .songslist-header {
+			position: relative;
+			width: 100%;
+			text-align: center;
+		}
+		.songslist-header {
+			height: 30px;
+			border-bottom: 1px solid #dad8d8;
+			line-height: 30px;
+			background-color: #def;
+		}
+
+		.songslist-name {
+			position: absolute;
+			width: 40%;
+			height: 100%;
+			border-right: 1px solid #dad8d8;
+		}
+		.songslist-singer {
+			position: absolute;
+			left: 40%;
+			width: 50%;
+			height: 100%;
+			border-right: 1px solid #dad8d8;
+		}
+		.songslist-option {
+			position: absolute;
+			left: 90%;
+			width: 10%;
+			height: 100%;
+		}
+
+		.songslist-main {
+			background-color: #fff;
+			height: 100%;
+		}
+		.songslist-main .songslist-name{
+			height: 50px;
+			line-height: 50px;
+			border: 0;
+		}
+		.songslist-main .songslist-singer{
+			height: 50px;
+			line-height: 50px;
+			border: 0;
+		}
+		.songslist-single {
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="songslist-op">
+			<label for="txtAddSName">歌曲名:</label><input type="text" id="txtAddSName" />
+			<label for="txtAddSinger">歌手:</label><input type="text" id="txtAddSinger" />
+			<button id="btnAdd">添加</button>
+			<button id="btnRemove">删除</button>
+		</div>
+
+		<div class="songslist-header">
+			<div class="songslist-name">歌曲名称</div>
+			<div class="songslist-singer">歌手</div>
+			<div class="songslist-option">操作</div>
+		</div>
+
+		<div class="songslist-main" id="c">
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="">
+		// 现在要做的是：
+		// 1 使用面向过程来实现最基本的功能
+		// 2 将面向过程的方式修改为面向对象的方式
+
+
+		// 数据驱动的思想
+		// 不会直接操作DOM元素，而是 直接操作数据！
+		// 只要数据变动了，就去重新渲染结构！
+
+		// 把数据作为功能的核心，所有的操作都是先操作数据，然后再做其他操作
+		// 在我们要先的歌曲列表的案例中，也是：
+		// 1 操作数据（增删改）
+		// 2 重新渲染页面结构
+
+		// 有操作数据的方法, 增删改查
+		// 需要有一个渲染页面结构的方法！
+		
+
+		/*var SongsManager = function() {
+			this.list = [];
+		};
+
+		SongsManager.prototype = {
+			add: function() {
+				this.list.push();
+			}
+		};*/
+
+	</script>
+
+	<script type="text/javascript">
+		/*var args = {
+			list: [
+				{sName: "痴心绝对", sSinger: "李圣杰"},
+				{ sName: "南山南",  sSinger: "马頔"}
+			],
+			id: "c"
+		};
+		var s = new SongsManager(args);
+
+		// 添加歌曲
+		document.querySelector("#btnAdd").onclick = function() {
+			var sName = document.querySelector("#txtAddSName").value;
+			var singer = document.querySelector("#txtAddSinger").value;
+
+			if(sName === "" || singer === "") {
+				return;
+			}
+			s.addSong(sName, singer);
+		};
+
+		// 删除歌曲
+		document.querySelector("#btnRemove").onclick = function() {
+			var sName = document.querySelector("#txtAddSName").value;
+
+			if(sName === "") {
+				return;
+			}
+			s.removeSong(sName);
+		};*/
+
+		// 添加歌曲
+		// s.addSong("如果没有你", "莫文蔚");
+		// 查询歌手
+		// var singer = s.getSinger("bjbj");
+		// console.log(singer);
+		// 删除歌曲
+		// s.removeSong("痴心绝对");
+		// console.log(s.list);
+	</script>
+</body>
+</html>

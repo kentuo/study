@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 1
+		function foo() {
+		    var num = 123;
+		    console.log(num);  // 123
+		}
+		foo();
+
+		// 因为num这个变量是在函数内部声明的，也就是说：
+		// 这个变量起作用的范围是： 函数foo的内部
+		// 而在全局作用域中是无法访问到 num 这个变量的
+		console.log(num); // 报错！
+	</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// ES5中提供的遍历数组的方法：
+		// forEach 和 map
+
+		var arr = [1, 3, 5, 7, 9];
+		/*for(var i = 0; i < arr.length; i++) {
+			console.log(arr[i]);
+		}*/
+		
+		// forEach方法的参数是一个 回调函数
+		// 数组中的每一个元素，都会调用一下回调函数
+		arr.forEach(function(value, index) {
+			// 回调函数有俩个参数：
+			// value：表示数组当前项的值
+			// index：表示索引号
+
+			console.log("索引号为：" + index + ", 值为：" + value);
+		});
+
+		// map 映射
+		// 实现：对数组中的每一项元素都乘以10，然后再返回一个新数组
+		var newArr = arr.map(function(value, index) {
+			// console.log("索引号为：" + index + ", 值为：" + value);
+
+			return value * 10;
+		});
+		console.log(newArr);
+	</script>
+</body>
+</html>

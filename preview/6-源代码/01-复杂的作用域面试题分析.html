@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 面试题中考察的知识点
+		// 1 原型链 -> 属性的查找
+		// 2 作用域链 -> 变量查找
+		// 3 静态成员和实例成员
+		// 4 this
+		// 5 运算符优先级的问题
+		// 6 命名冲突的问题
+
+		// 1 先预解析
+
+		/*function Foo() {
+		    getName = function(){ alert(1); };
+		    return this; 
+		}
+
+		Foo.getName = function() { alert(2); };
+		Foo.prototype.getName = function(){ alert(3); };
+		var getName = function() { alert(4); };
+		function getName(){ alert(5); }
+
+		Foo.getName();             // ? 
+		getName();                 // ? 
+		Foo().getName();           // ? 
+		getName();                 // ? 
+		new Foo.getName();         // ? 
+		new Foo().getName();       // ? 
+		new new Foo().getName();   // ? */
+
+
+		function Foo() {
+		    getName = function(){ alert(1); };
+		    // Foo() 这种形式调用的函数，this 就是 window
+		    return this; 
+		}
+		
+		var getName;
+		function getName(){ alert(5); }
+		// 到这一行为止， getName 就表示一个函数
+
+		// 给函数Foo添加了一个 静态方法
+		Foo.getName = function() { alert(2); };
+		Foo.prototype.getName = function(){ alert(3); };
+		getName = function() { alert(4); };
+
+		Foo.getName();             // ? 2
+		getName();                 // ? 4
+		Foo().getName();           // ? 1
+		// window.getName();  ==> getName();
+		getName();                 // ? 1
+		// 运算符的优先级问题
+		// 因为 .运算符的优先级比new 不带小括号的优先级要高，
+		// 所以，先执行Foo.getName ，然后在new
+		new Foo.getName();         // ? 2
+
+		// 因为 new带小括号的优先级与.运算符的优先级相同
+		// 会从左到右执行，也就是先创建Foo的实例，然后实例再调用getName方法
+		// 又因为创建实例对象的时候，没有给this添加任何成员，所以，对象本身没有任何的属性
+		// 或者是方法，就要到 原型中查找！
+		new Foo().getName();       // ? 3
+		/*var foo = new Foo();
+		foo.getName();*/
+
+
+		// new 后面必须要跟一个函数调用
+		new (new Foo()).getName();   // ? 3
+		/*var foo = new Foo();
+		// new foo.getName()
+		var fg = foo.getName;
+		new fg();*/
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 2
+		/*var scope = "global";
+
+		function foo() {
+		    console.log(scope); // 
+		    var scope = "local";
+		    console.log(scope); // 
+		}
+		foo();*/
+
+		// 对于这种作用域的面试题，按照以下步骤：
+		// 1 变量提升
+		// 2 从上往下执行代码
+		/*var scope;
+		function foo() {
+			// 声明一个变量但是没有赋值，变量的值就是：undefined
+			var scope;
+
+			// 注意：！！！只看声明！！！
+			// 其实是在查找变量scope的值，如果在当前作用域中
+			// 找到了 变量的声明，就直接拿过来用！
+			// 如果在当前作用域中没有找到，会去当前作用域的上一级作用域中查找
+			// 如果找到了，直接拿过来使用！
+			// 但是如果在全局作用域中，也没有找到变量，那就直接报错！！！
+		    console.log(scope); // ?? undefined
+		    scope = "local";
+		    console.log(scope); // ?? local
+		}
+
+		scope = "global";
+		foo();*/
+
+
+		// 变式
+		var scope = "global";
+
+		function foo() {
+		    console.log(scope); // global
+		    scope = "local";
+		    console.log(scope); // local
+		}
+		foo();
+
+
+		// 3
+		/*if("a" in window){
+		    var a = 10;
+		}
+
+		alert(a); // ?  */
+
+		// var a;
+		// // 1 声明的所有全局变量都作为 window的属性存在！
+		// // 2 in运算符：查看window的原型链对象中有没有a这个属性
+		// if("a" in window) {
+		//     a = 10;
+		// }
+
+		// alert(a); // ?  
+
+
+		// 4
+		// if(!"a" in window){
+		//     var a = 10;
+		// }
+
+		// alert(a); // ? undefined
+
+		// var Person = function() {};
+		// var p = new Person;
+		// 就是要查找对象p中有没有a这个属性
+		// 如果没有，就回去p的原型对象(Person.prototype)中查找有没有这个属性 
+		// 就回去 Object.prototype 中查找
+		// 如果还没有，就会返回：false
+		// console.log("a" in p);
+
+
+		// 5
+		/*var foo = 1;
+		function bar() {
+		    if(!foo) {
+		        var foo = 10;
+		    }
+		    alert(foo); // 
+		}
+		bar();*/
+		
+		var foo;
+		function bar() {
+			var foo;
+
+		    if(!foo) { // !undefined -> !false -> true
+		        foo = 10;
+		    }
+		    alert(foo); // 
+		}
+
+		foo = 1;
+		bar();
+	</script>
+</body>
+</html>

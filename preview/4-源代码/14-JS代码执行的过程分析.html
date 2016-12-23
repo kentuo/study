@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// js代码在执行的时候，分为两步操作：
+		// 1 预解析
+		// 		主要就是：变量提升和函数提升
+		// 		变量提升：提升的是 当前变量的声明，赋值还保留在原来的位置！
+		// 		函数提升：假设函数声明，可以认为是把整个函数体声明了！
+		// 		function fn() {}
+		// 
+		// 2 从上往下一行一行的执行代码
+		// 		注意：声明的代码是不会执行的！同时在断点调试的时候，断点也是无法停止的！
+		
+		var num;
+		function fn() {
+			console.log("msg");
+		}
+		fn();
+	</script>
+</body>
+</html>

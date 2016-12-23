@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 案例：求一个数组中的最大值
+		var arr = [9, 1, 4, 10, 7, 22, 8];
+		/*var maxNum = arr[0];
+		for(var i = 1; i < arr.length; i++) {
+			if(maxNum < arr[i]) {
+				maxNum = arr[i];
+			}
+		}
+		console.log(maxNum);*/
+
+		// 使用 apply 来实现求最大值的功能：
+		// 借用内置的方法，目的是为了：简化操作！
+		// 
+		// Math.max(1, 3, 6, 9, 5);
+		// 作用：用来求最大值
+		
+		// 因为 Math.max 方法的内部没有用到this，所以，一个参数传入null即可！
+		var maxNum = Math.max.apply(null, arr);
+		// Math.max(9, 1, 4, 10, 7, 22, 8);
+		console.log(maxNum);
+
+		/*// 案例：将传入的参数打印，参数之间用-相互连接
+		// foo(1, 3, "abc", "ffff", 99) // 1-3-abc-ffff-99
+		function foo() {
+			var str = "";
+			for(var i = 0; i < arguments.length; i++) {
+				if(arguments.length - 1 === i) {
+					// 最后一个！
+					str += arguments[i];
+				} else {
+					str += arguments[i] + "-";
+				}
+			}
+			console.log(str);
+		}
+
+		foo(1, 3, "abc", "ffff", 99);*/
+
+		function foo() {
+			// 借用数组的join方法， join 方法需要一个参数
+			// arr.join("-"); 这是把数组中的数据，使用 - 链接在一起了！
+			// 
+			// join 是哪来的？ Array.prototype
+			// 
+			// 此处，第一个参数 arguments ，可以理解为：让 arguments 来调用 join方法
+			// var str = Array.prototype.join.apply(arguments, ["-"]);
+			var str = [].join.apply(arguments, ["-"]);
+			console.log(str);
+		}
+		foo(1, 3, "abc", "ffff", 99);
+
+
+		// 补充：
+		// 因为 arguments 是一个伪数组，如果能够将伪数组转化为一个真数组
+		// 操作起来会更加方便一些！
+		function argToArray() {
+			var arg = [].slice.apply(arguments, [0]);
+			console.log(arg);
+		}
+
+		argToArray(1, 3, "abc", "ffff", 99);
+
+
+		// 手动创建伪数组
+		var obj = {length: 0};
+		/*obj[0] = "第一个元素";
+		obj[1] = "第二个元素";
+		obj.length = 2;*/
+		// 借用数组的push方法来添加
+		[].push.apply(obj, ["第一个元素"]);
+		[].push.apply(obj, ["第二个元素"]);
+		console.log(obj);
+	</script>
+</body>
+</html>

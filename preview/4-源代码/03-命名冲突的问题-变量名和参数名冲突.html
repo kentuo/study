@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 总结：
+		// 1 函数参数首先被提升
+		// 2 如果重名的是一个变量，传入了参数：
+		// 		2.1 如果是在变量赋值之前，此时获取的是：参数的值！
+		// 		2.2 如果是在变量赋值之后，此时获取的是：变量的值！
+		/*(function (a) {
+			// a = 100;
+			var a;
+			console.log(a); // 100
+
+			a = 10;
+			console.log(a); // 10
+
+		})(100);*/
+		
+		// 3 如果重名的是一个变量，但是没有传入参数：
+		// 		3.1 如果是在变量赋值之前，此时获取的是：undefined！
+		// 		3.2 如果是在变量赋值之后，此时获取的是：变量的值！
+		/*(function (a) {
+			// a = 100;
+			var a;
+			console.log(a); // undfined
+
+			a = 10;
+			console.log(a); // 10
+
+		})();*/
+		
+		// 4 如果重名的是一个函数，此时，不管有没有传入参数，都是函数的值！
+		(function (a) {
+			console.log(a);
+			function a() {}
+			console.log(a);
+		})(100);
+
+		(function (a) {
+			console.log(a);
+			function a() {}
+			console.log(a);
+		})();
+
+
+
+
+		// (function (a) {
+		// 	// a = 100;
+		// 	var a;
+		// 	// function a() {}
+		// 	// 1
+		//     console.log(a); // function
+
+
+		//     var a = 10;
+		//     // 2
+		//     console.log(a); // 10
+		//     // function a(){}
+		// })( 100 );
+
+
+		// (function (a) {
+		// 	var a;
+		// 	function a() {}
+		// 	// 3
+		//     console.log(a); // function a() {}
+
+		//     var a = 10;
+		//     // 4
+		//     console.log(a);
+		// })();
+
+
+
+
+
+
+
+
+
+
+		// 此时，函数处于 函数声明的位置，函数声明的语法不允许后面带小括号
+		// 所以，此时需要将函数声明转化为 函数表达式
+		// 在这个代码中，就是使用小括号将函数声明转化为函数表达式了！
+		// (function name() {})();
+
+		// 以下 !/+/- 的作用都是将函数声明转化为函数表达式！
+		// !function(num) {console.log(num)}( 1+2 );
+		// +function() {console.log(2)}( 1+2 );
+		// -function() {console.log(3)}( 1+2 );
+
+		// 此时，函数处在 函数表达式的位置，所以，自调用函数可以省略第一个小括号！
+		// var fn = function() {
+
+		// 	return 123;
+		// }();
+		// console.log(fn);
+
+		// 自调用函数：
+		// 1 (function() {})();
+		// 		第一个小括号的作用：将函数转化为函数表达式！
+		// 
+		// 2 (function() {}());
+	</script>
+</body>
+</html>

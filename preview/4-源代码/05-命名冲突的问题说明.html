@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 1
+		// var a;
+		// function a() {}
+		// console.log(typeof a); // function
+
+		// 2
+		// console.log(a); // function() {}
+		// var a = 123;
+		// function a() {}
+
+		// 提升之后：
+		/*var a;
+		function a() {}
+		console.log(a);
+		a = 123;*/
+
+		
+		// 3
+		// var a = 123;
+		// console.log(a);
+		// function a() {}
+
+		var a;
+		function a() {}
+		a = 123;
+		console.log(a); // 123
+	</script>
+</body>
+</html>

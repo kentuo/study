@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 语法糖：给开发人员的一个小甜头
+
+		// 在讲闭包的时候，实现了一个对某一个变量进行读取和设置的
+		/*var fn = function() {
+			var num = 123;
+
+			return {
+				getNum: function() {
+					return num;
+				},
+				setNum: function(value) {
+					num = value;
+				}
+			};
+		};
+		var numObj = fn();
+		numObj.getNum();
+		numObj.setNum(666);*/
+
+		
+		// 使用getter 和 setter
+		function Person(name) {
+			// get 和 set 后面跟着的名字可以相同也可以不同
+			// 但是，一般情况下，为了使用方便，这两个名字最好设置为相同的！
+
+		    return {
+		        get name1() {
+		            return name;
+		        },
+		        set name2(v) {
+		            name = v;
+		        }
+		    };
+		}
+		
+		// getter和setter语法糖中，还是将其当作 属性来用！
+		// var p = new Person("jim");
+		var p = Person("jim");
+		console.log(p.name1);
+		
+		p.name2 = "tom";
+		console.log(p.name1);
+
+	</script>
+</body>
+</html>

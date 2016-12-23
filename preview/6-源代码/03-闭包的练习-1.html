@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		li {
+			height: 30px;
+			line-height: 30px;
+			background: #def;
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>这是第01个li元素内容</li>
+		<li>这是第02个li元素内容</li>
+		<li>这是第03个li元素内容</li>
+		<li>这是第04个li元素内容</li>
+		<li>这是第05个li元素内容</li>
+		<li>这是第06个li元素内容</li>
+		<li>这是第07个li元素内容</li>
+		<li>这是第08个li元素内容</li>
+		<li>这是第09个li元素内容</li>
+		<li>这是第10个li元素内容</li>
+	</ul>
+	
+	<script type="text/javascript">
+		// 使用沙箱
+		(function () {
+			// 给li元素绑定单击事件，点击相应的元素打印其索引号
+			var lis = null,
+				i = 0,
+				len = 0;
+
+			lis = document.querySelectorAll("li");
+			len = lis.length;
+			
+			for(; i < len; i++) {
+				// 给每一个li元素帮定了单击事件，绑定事件的时候，事件是不会执行的！
+				// lis[i].onclick = function() {
+				// 	// 
+				// 	alert(i);
+				// };
+				
+				// 这是一个赋值操作，会把等号右边的表达式的值交给等号的左边！
+				// 但是，现在等号右边表达式的值是一个自调用函数，所以需要去调用这个函数
+				// for循环执行多少次，自调用函数就会执行多少次
+				// 那么，i的值会随着for循环的每次变化而递增（0,1,2.....）
+				// 此时，还会把i的值当作是自调用函数的实参，实参的值会替换掉形参的值
+				// 比如：第一循环的时候，i的值为：0，此时调用函数，会把 num 这个形参的值
+				// 设置为：0.
+				// 在 函数的内容创建了一个变量，这个变量的值：0
+				// 后面，又返回了一个函数，也就是说，当前被返回函数的环境：
+				// 被返回的函数包含在一个函数中，这个函数中有一个变量a，变量a的值为：0
+				// 并且， 返回函数中还引用了 变量a的值
+
+				lis[i].onclick = function(num) {
+					var a = num;
+					// var a = 0;
+
+					return function() {
+						alert(a);
+					};
+				}(i);
+			}
+			console.log(i);
+			
+			// 第一次执行的结果：
+			var fn1 = function() {
+				var a = 0;
+
+				return function() {
+					alert(a);
+				};
+			}
+
+			var fn2 = function() {
+				var a = 1;
+				return function() {
+					alert(a);
+				};
+			}
+
+			// 问题1: 为什么单击每一个li元素触发单击事件，弹出来的内容都是：10？
+			// 		因为i是一个全局变量，然后，当for循环执行完毕，i的值已经变为：10了
+			// 		然后，触发事件的时候，i的值已经变为 10 了。
+			// 		alert(i) 的时候，会执行变量搜索的操作，因为函数内部没有声明变量i，
+			// 		所以，去全局作用域中查找 i的值，因为 i 的值已经是 10  了。
+			// 		最终，每次触发事件打印出来的值都是：10
+			// 		
+			// 问题2: 事件是什么时候执行的？
+			// 		单击每一个li元素的时候，才执行的单击事件
+			// 		此时，变量i，就变为最大值！
+		})();
+	</script>
+</body>
+</html>

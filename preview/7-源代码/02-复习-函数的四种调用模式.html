@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 函数的四种调用模式：
+		// 1 函数模式（this -> window）
+		// 2 方法模式（this -> 调用方法的对象）
+		// 3 构造函数模式（this -> new创建的对象） new Person();
+		// 4 call/apply 借用方法模式
+		
+		// 函数模式：fn()
+		// function fn(num1, num2) {
+		// 	console.log(this);
+		// }
+
+		// 方法模式：obj.fn()
+		var obj = {
+			say: function() {}
+		};
+		obj.say();
+
+		// 构造函数模式：new Person()
+		var Person = function() {
+			this.name = "xiaoming";
+		};
+		var p = new Person();
+
+		// 分析 this 指向问题，只需要查看函数是如何被调用的
+
+		// num1 是值类型（number）,它的值是： 123
+		var num1 = 123;
+		// num2 是引用类型（object），它的值也是：123
+		// var num2 = new Number(123);
+		
+		// 因为 apply/call 要求第一个参数必须是一个对象类型的，
+		// 如果我们传入的参数不是对象类型，此时，在apply方法的内部
+		// 会自动的将传入的参数 转化为：对象类型
+		// 
+		// 对于这个例子来说，num1是值类型的，所以，在apply内部会将其转化为
+		// 包装类型： new Number(num1);
+		fn.apply(num1);
+		
+		function fn() {
+			// 当前的this 是一个对象类型的，如果是 获取类型那么获取到的是：object
+			// 但是如果直接做运算操作（this + 123），会被转化为数值然后，在计算
+			// 
+			// 也就是说：只有在获取this的类型的时候，需要注意一下！
+			console.log(this);
+			console.log(typeof this);
+
+			console.log(this + 123);
+		}
+
+		// 上下文模式（借用方法模式）：
+		// 第一个参数：指定 this 的对象，表示指定方法中的 this 
+		// 				如果第一个参数不是对象：number string boolean
+		// 				此时，会自动的被转化为其 包装对象
+		// 				number -> new Number()
+		// 				string -> new String()
+		// 				boolean -> new Boolean()
+		// 								
+		// 第二个参数：是一个数组（或者伪数组），表示传给调用方法的参数。
+		// 其中的数组中的每一个元素将作为单独的参数传给函数
+
+		// call 和 apply 方法的参数都是可以省略的
+		// fn.apply();	// 此时，函数内部的this也是window 直接使用这种方式调用fn();
+		// fn.apply(null, [123, 456]);
+
+		// 基本语法：
+		// 函数名.apply(对象, 数组参数)
+		// 作用： 借用用法 ，改变函数内部this的指向
+		// 
+		// call和apply 是由 Function.prototype 提供的
+		// console.log(Function.prototype);
+	</script>
+</body>
+</html>

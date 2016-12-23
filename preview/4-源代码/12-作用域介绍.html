@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 作用域： 作用的范围，或者是变量起作用的区域
+
+		// 一共有两种作用域：
+		// 1 块级作用域， 花括号中的内容就是代码块
+		// 		if( true ) {
+		// 			var num = 123;
+		// 		}
+		/*for(var i = 0; i < 10; i++) {
+
+		}
+		console.log(i); // 10*/
+
+		// var arr = [1, 8, 9],
+		// 	length = arr.length,
+		// 	i = 0;
+
+		// // for(i = 0; i < length; i++) {
+		// for(;i < length; i++) {
+		// 	console.log(arr[i]);
+		// }
+
+
+		// 2 词法作用域（JavaScript）
+		// 什么叫做词法作用域：
+		// 	
+		// 变量的作用范围, 在书写代码的时候就已经决定, 与运行时（代码执行的时候）无关。
+		
+		// js中什么能够形成作用域？
+		// 在JavaScript中只有 函数 才能够形成一个作用域！
+		// 所以，词法作用域，又叫做：函数作用域
+		// 
+		// 此处，函数fn形成了一个作用域，函数内部声明的变量，
+		// 只在函数内部起作用，而在全局作用域中是访问不到的！
+		var fn = function() {
+			var num = 123;
+		};
+
+		console.log(num);
+	</script>
+</body>
+</html>

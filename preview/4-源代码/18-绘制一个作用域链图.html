@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 绘制以下代码的作用域链图
+		var num = 123;
+		var f = function() {
+		    var num = 456;
+		    var o = {};
+		    var foo = function() {
+		    	console.log(arr);
+		    };
+		};
+		var f1 = function() {
+			var arr = [];
+		};
+		var arr = [];
+		
+		// 绘制作用域链的规则：
+		// 1 把全局作用域当作0级别的链看待，用一条线来表示一个作用域
+		// 2 绘图的时候，只把当前作用域中声明的变量或者是函数绘制出来！
+		// 3 绘制的时候，可以先把声明的变量绘制出来，变量的值可以在代码执行的时候
+		// 		在设置！
+		// 4 如果是函数，那么就在该函数上引出一条链出来，链的级别是当前作用域链的级别+1
+		// 5 如果函数内部还有函数，就继续在当前的基础上再+1
+		// 
+		// 变量的查找就是沿着绘制的作用域链进行查找的！
+		// 并且是从高级别的链往低级别的链进行查找
+	</script>
+</body>
+</html>

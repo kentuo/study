@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 面试题2：
+		// 想让 setTimeout 打印出 0-9 应该使用闭包！
+		for(var i = 0; i < 10; i++) {
+			// console.log("当前的i值为：" + i);
+
+			/*setTimeout(function() {
+				console.log(i);
+			}, 0);*/
+
+			var callback = function(num) {
+
+				return function() {
+					console.log(num);
+				};
+			}(i);
+
+			setTimeout(callback, 500 * i);
+		// }
+
+	</script>
+</body>
+</html>

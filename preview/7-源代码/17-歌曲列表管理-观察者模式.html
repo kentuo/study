@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.container {
+			margin: 100px auto;
+			width: 850px;
+			border: 1px solid #dad8d8;
+
+			/*height: 100%;*/
+		}
+		.container h2 {
+		    border-top: 3px dotted #abc;
+		    margin-top: 50px;
+		}
+		.songslist-main, .songslist-header {
+			position: relative;
+			width: 100%;
+			text-align: center;
+		}
+		.songslist-header {
+			height: 30px;
+			border-bottom: 1px solid #dad8d8;
+			line-height: 30px;
+			background-color: #def;
+		}
+
+		.songslist-name {
+			position: absolute;
+			width: 40%;
+			height: 100%;
+			border-right: 1px solid #dad8d8;
+		}
+		.songslist-singer {
+			position: absolute;
+			left: 40%;
+			width: 50%;
+			height: 100%;
+			border-right: 1px solid #dad8d8;
+		}
+		.songslist-option {
+			position: absolute;
+			left: 90%;
+			width: 10%;
+			height: 100%;
+		}
+
+		.songslist-main {
+			background-color: #fff;
+			height: 100%;
+		}
+		.songslist-main .songslist-name{
+			height: 50px;
+			line-height: 50px;
+			border: 0;
+		}
+		.songslist-main .songslist-singer{
+			height: 50px;
+			line-height: 50px;
+			border: 0;
+		}
+		.songslist-single {
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="songslist-op">
+			<label for="txtAddSName">歌曲名:</label><input type="text" id="txtAddSName" />
+			<label for="txtAddSinger">歌手:</label><input type="text" id="txtAddSinger" />
+			<button id="btnAdd">添加</button>
+		</div>
+		
+		<h2>全部歌曲</h2>
+		<div class="songslist-header">
+			<div class="songslist-name">歌曲名称</div>
+			<div class="songslist-singer">歌手</div>
+			<div class="songslist-option">操作</div>
+		</div>
+		<div class="songslist-main" id="c">
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+		</div>
+		
+
+		<h2>
+			<span>蓝瘦-喜欢的歌曲</span>
+			<button id="btnLS">订阅</button>
+		</h2>
+		<div class="songslist-header">
+			<div class="songslist-name">歌曲名称</div>
+			<div class="songslist-singer">歌手</div>
+			<div class="songslist-option">操作</div>
+		</div>
+		<div class="songslist-main" id="c1">
+		</div>
+
+		<h2>
+			<span>香菇-喜欢的歌曲</span>
+			<button id="btnXG">订阅</button>
+		</h2>
+		<div class="songslist-header">
+			<div class="songslist-name">歌曲名称</div>
+			<div class="songslist-singer">歌手</div>
+			<div class="songslist-option">操作</div>
+		</div>
+		<div class="songslist-main" id="c2">
+		</div>
+
+		<h2>
+			<span>表姐-喜欢的歌曲</span>
+			<button id="btnBJ">订阅</button>
+		</h2>
+		<div class="songslist-header">
+			<div class="songslist-name">歌曲名称</div>
+			<div class="songslist-singer">歌手</div>
+			<div class="songslist-option">操作</div>
+		</div>
+		<div class="songslist-main" id="c3">
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var SongsManager = function(list, id) {
+			this.songsList = list || [];
+			// 指定歌曲列表的id
+			this.id = id;
+
+			// 调用渲染页面结构的 render 方法
+			this.render();
+		};
+		
+		SongsManager.prototype = {
+			addSong: function(songInfo) {
+				this.songsList.push(songInfo);
+
+				this.render();
+			},
+			// 2 删除
+			deleteSong: function(name) {
+				var songsList = this.songsList;
+
+				for(var i = 0; i < songsList.length; i++) {
+					if(songsList[i].sName === name) {
+						songsList.splice(i, 1);
+
+						break;
+					}
+				}
+
+				this.render();
+			},
+			// 3 删除
+			updateSong: function(name, singerName) {
+				var songsList = this.songsList;
+
+				for(var i = 0; i < songsList.length; i++) {
+					if(songsList[i].sName === name) {
+						songsList[i].sSinger = singerName;
+
+						break;
+					}
+				}
+				this.render();
+			},
+			// 查询
+			getSong: function(name) {
+				var songsList = this.songsList, msg = "";
+
+				for(var i = 0; i < songsList.length; i++) {
+					if(songsList[i].sName === name) {
+						msg = songsList[i].sSinger;
+
+						break;
+					}
+				}
+
+				console.log(msg || "没有查询到歌曲信息！");
+			}
+		};
+		
+		// 给原型对象添加一个 渲染方法 render
+		SongsManager.prototype.render = function() {
+			var songsList = this.songsList;
+			// 用来存储所有的html结构（字符串）
+			var htmlArr = [];
+			songsList.forEach(function(songInfo) {
+				// songInfo 就是每一个歌曲信息对象
+				htmlArr.push('<div class="songslist-single">');
+				htmlArr.push('	<div class="songslist-name">'+ songInfo.sName +'</div>');
+				htmlArr.push('	<div class="songslist-singer">'+ songInfo.sSinger +'</div>');
+				htmlArr.push('</div>');
+			});
+
+			// document.querySelector("#c").innerHTML = htmlArr.join("");
+			document.querySelector( this.id ).innerHTML = htmlArr.join("");
+		};
+
+		// 1 需要在创建实例对象的时候，让用户指定当前实例对象
+		// 用来管理哪一个歌曲列表！
+		
+		// 创建一个观察者模式对象
+		var pubSub = {
+			// 此处使用对象，用来存储所有的观察者，
+			// 在这个例子中谁是观察者？
+			subscriber: [],
+			// 添加订阅的方法
+			addSub: function(callback, obj) {
+				// 案例中，就是需要将歌曲的信息拿到，然后，执行相应的操作
+				// callback 用来执行 接受到消息之后的相应操作！
+				// eventName 用来表示消息的类型，类型不同会有不同的操作！
+
+				// this.subscriber.push(callback);
+				this.subscriber.push({
+					ctx: obj,
+					cb: callback
+				});
+			},
+			// 发布消息
+			pub: function(data) {
+				for(var i = 0; i < this.subscriber.length; i++) {
+					// subscriber[i] ===> 函数
+					// this.subscriber[i](data);
+
+					// subscriber[i] 是一个对象
+					this.subscriber[i].cb.call(this.subscriber[i].ctx, data);
+				}
+			}
+		};
+
+		// 使用面向对象创建实例，管理歌曲列表
+		var s = new SongsManager([
+			{sName: "痴心绝对", sSinger: "李圣杰"},
+			{ sName: "南山南",  sSinger: "马頔"}
+		], "#c");
+
+		var s1 = new SongsManager([], "#c1");
+		var s2 = new SongsManager([], "#c2");
+		var s3 = new SongsManager([], "#c3");
+
+		// 找到 添加按钮绑定单击事件
+		document.querySelector("#btnAdd").onclick = function() {
+			// 获取到歌曲名称 和 歌手 文本框的值
+			var name = document.querySelector("#txtAddSName").value;
+			var singer = document.querySelector("#txtAddSinger").value;
+
+			s.addSong({sName: name, sSinger: singer});
+
+			// 假设，三个人都订阅了 歌曲发布的消息，所有的人都需要添加歌曲
+			// 添加操作的内部，会自动渲染
+			/*
+			s1.addSong({sName: name, sSinger: singer});
+			s2.addSong({sName: name, sSinger: singer});
+			s3.addSong({sName: name, sSinger: singer});*/
+
+			// 把消息的数据 告诉每一个订阅者
+			pubSub.pub({sName: name, sSinger: singer});
+		};
+		
+		// 给每一个订阅按钮，添加单击事件
+		document.querySelector("#btnLS").onclick = function() {
+			pubSub.addSub(s1.addSong, s1);
+
+			this.disabled = true;
+		};
+		document.querySelector("#btnXG").onclick = function() {
+			pubSub.addSub(s2.addSong, s2);
+
+			this.disabled = true;
+		};
+		document.querySelector("#btnBJ").onclick = function() {
+			pubSub.addSub(s3.addSong, s3);
+
+			this.disabled = true;
+		};
+	</script>
+</body>
+</html>

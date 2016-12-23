@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+
+		/*var Person = function(name, age, gender) {
+			// 给对象this添加了一个name属性，属性的值是：参数name的值
+			// 等号 后面的name 是：传入的参数！
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		};
+
+		// 学生类 和 老师类，都属于人类，那也就是说：
+		// 都有 姓名、性别、年龄、身高、体重。。。等属性
+		var Student = function(name, age, gender) {
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		};
+
+		var Teacher = function(name, age, gender) {
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		};*/
+
+		// 以上的做法，会造成 添加属性的操作代码 书写多了！
+		// DRY原则： Don't Repeat Yourself!!!
+		
+		// 为了解决以上的问题，我们可以通过 借用构造函数继承 来改造！
+		var Person = function(name, age, gender) {
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		};
+		
+		// 每一个函数内部都有一个 this
+		
+		var Student = function(name, age, gender) {
+			// 这句代码是什么意思？
+			// 1 实际上还是在调用 Person 函数
+			// 		Person(name, age, gender) 这种方式来调用，函数Person内部
+			// 			的this是谁： window
+			var that = this;
+			// 让 Person函数内部的this 变为：that
+			// this 、that 就是 通过new来创建的新实例对象
+			Person.call(that, name, age, gender);
+
+			// 这种方式也可以！
+			// Person.apply(that, arguments);
+		};
+
+		var stu = new Student("小明", 19, "男");
+		console.log(stu);
+
+		var Teacher = function(name, age, gender) {
+			Person.call(this, name, age, gender);
+		};
+	</script>
+</body>
+</html>

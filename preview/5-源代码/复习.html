@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<div>
+		<p></p>
+		<div>
+			<p><span>这是p元素的子代元素 - 996</span></p>
+		</div>
+	</div>
+	
+	<div>
+		<p></p>
+		<div>
+			<p><span>这是p元素的子代元素 - 你瞅啥</span></p>
+		</div>
+	</div>
+	<div>
+		<p></p>
+		<div>
+			<p><span>这是p元素的子代元素 - 抽你咋滴</span></p>
+		</div>
+		<div>
+			<ul>
+				<li>这是li</li>
+				<li>这是li</li>
+				<li>这是li</li>
+				<li>这是li</li>
+				<li>这是li</li>
+				<li>这是li</li>
+			</ul>
+		</div>
+	</div>
+
+	<h1>成功的背后不是沧桑就是肮脏！</h1>
+	<h1>以大多数人的努力程度之低，根本轮不到拼天赋</h1>
+	
+
+	<script type="text/javascript">
+		// 1 属性的读取和设置
+		// 读取：（原型链）
+		// 		首先在当前对象中查找，如果有，就直接返回
+		// 		如果没有，就在对象的原型对象中查找，如果有，就返回
+		// 		如果还没有，就继续在原型对象的原型对象中查找，直到 Object.prototype
+		// 		如果还是没有找到，就返回 undefined
+		// 
+		// 设置（只与当前对象有关）：
+		// 		只会操作对象本身，如果对象中没有该属性则创建该属性，并赋值；
+		// 		如果对象中有，则修改
+
+		/*var Person = function() {};
+		var p = new Person();
+		// console.log(p);
+
+		Person.prototype.age = 1;
+		p.age = 19;
+		console.log(p.age);	// 19
+
+		var p1 = new Person();
+		console.log(p1.age); // 1*/
+
+
+		// 2 变量的读取和设置
+		// 读取：（作用域链）
+		// 		首先在当前作用域（n级链）中查找(只查找声明)，如果有，就直接返回
+		// 		如果没有，就在 n-1级链 中查找，如果有，就返回
+		// 		如此往复，直到 0级链（全局作用域）
+		// 		如果还没有找到，就报错（因为访问了一个没有声明的变量所以会报错）
+		// 		
+		// 设置：（创建全局变量）
+		// 		首先在当前作用域（n级链）中查找，如果有，就直接赋值
+		// 		如果没有，就在 n-1级链 中查找，如果有，就直接赋值
+		// 		如此往复，直到 0级链
+		// 		如果还没有找到，就创建全局变量（不要这么做！）
+		
+		/*var n;
+		function fn() {
+			// 1级链
+			var n;
+			console.log(n); // undefined
+
+			n = 345;
+			console.log(n);	// 345
+		}
+
+		fn();
+		console.log(n);*/
+
+
+		// 作用域分两种：
+		// 1 块级作用域（JavaScript不支持）
+		// 		if(true) { var int = 0; }
+		// ES6中提供的一个 let 关键字，用来声明局部变量（块级）
+		/*if(true) {
+			let num = 123;
+			console.log(num);
+		}
+		console.log(num);*/
+
+
+		// 2 词法作用域 （函数作用域）
+		// 		a. 变量的作用范围在书写代码的那一刻，就定下来了，与运行时无关
+		// 		b. 在函数内部定义的变量，在函数外部无法访问到
+		// 		c. 在函数内部能够访问到函数外部声明的变量，但是在外部无法访问到内部的变量
+
+		// 什么叫词法作用域？
+		// 变量在声明的时候，作用域就定下来了，与运行时无关
+
+		/*var num = 123;
+		function fn() {
+			var num;
+
+			console.log(num);
+			console.log(n);
+
+			function f() {
+				var n = 123;
+				function foo() {}
+			}
+		}
+		fn();*/
+
+		// var num = 999;
+		// 作用域链：
+		// 每个函数都会形成一个作用域，如果函数被其他函数包裹，
+		// 包裹函数也有作用域，一直往上直到全局环境。
+		// 这样就形成了一条作用域链。
+
+
+		// 作用域链绘制规则
+		// 1 绘制的时候指绘制：当前作用域中声明的变量或者函数
+		// 2 如果遇到函数，就引出一条新的链出来，如果函数是在n级链中声明，
+		// 			那么就 引出 n + 1 级链
+		// 
+		// 变量搜索原则：从相关的高级链往低级链中查找
+
+		
+		function fn() {
+	      var num = 123;
+
+	      // 也可以认为： 通过new Function创建出来的函数的作用域链：
+	      // 包括 自身的作用域 以及全局作用域
+	      // 1 new Function 创建了一个函数，函数有自身的作用域
+	      // 2 全局作用域
+	      // 3 注意：访问不到包裹这个函数的函数作用域
+	      var f = new Function("var num; console.log(num);");
+	      f();
+	   }
+	   fn();
+	</script>
+</body>
+</html>

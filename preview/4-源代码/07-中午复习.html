@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 函数表达式能够出现的位置：
+		// 1 作为变量的值
+		// 		var fn = function() {};
+		// 2 setTimeout(function() {}, 1000);
+		// 3 var fn = function() {
+		// 		return function() {
+		// 		};
+		// };
+
+		// 函数声明，只能出现在：全局环境中 以及 其他函数内部
+		// function fn() {}
+		// 
+		// function fn() {
+		// 		function foo() {}
+		// }
+
+		// 自调用函数中： 小括号的作用是将函数声明转化为函数表达式
+		// (function() {})();
+		// !function() {}();
+		
+		// 面试题1：
+		/*var num = 123;
+		function f1(num) {
+			// num = 456
+		    // 参数理解为：函数内部的一个变量, 函数内部声明的一个变量（js引擎帮我们自动声明好了！）
+		    // var num;
+		    console.log(num); // undefined
+		}
+
+		function f2() {
+		    var num = 456;
+
+		    // 调用函数，将num的值 传递给了函数的形参
+		    // f1(num);
+		    // f1(456);
+		    f1();
+		}
+		f2();*/
+
+		// 面试题2:
+		// var num = 123;
+		// function f1() {
+		//     console.log(num); // 456
+		// }
+		// function f2() {
+		//     num = 456;
+		//     f1();
+		// }
+
+		// f2();
+		// console.log(num); // 456
+
+
+		// 什么是闭包？
+		// 从字面意思来理解就是封闭和包裹，在函数内部声明的变量，在函数外部无法访问到，
+		// 因此这个函数就构成了一个闭包！
+
+		// 闭包包含了哪两部分内容？
+		// 1 函数体（函数代码）
+		// 2 函数所处的环境（作用域链）
+
+		// 闭包就是对函数作用域的应用！
+
+		// 闭包的作用：对函数内部的变量起到了保护的作用！
+
+		// 学习闭包就是要想办法，在函数的外部来访问到函数内部的变量！
+
+		// 闭包的基本模型：
+		function fn() {
+			var num = Math.random();
+
+			return function() {
+				return num;
+			};
+		};
+		
+		var fn1 = fn();
+		var num1 = fn1();
+		var num2 = fn1();
+		console.log(num1);
+		console.log(num2);
+	</script>
+</body>
+</html>

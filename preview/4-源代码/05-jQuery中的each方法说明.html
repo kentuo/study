@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		div {
+			width: 300px;
+			height: 100px;
+			margin-bottom: 10px;
+			background-color: #abc;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+
+	<script type="text/javascript" src="jquery-1.12.3.js"></script>
+	<script type="text/javascript">
+		// jQuery中的each方法 有两种调用方式:
+		// 1 作为 实例成员来调用
+		// 		$("div").each(function() {});
+		// 2 作用 静态成员来调用
+		// 		// 第一个参数表示: 要被遍历的对象
+		// 		// 第二个参数表示: 回调函数, 每一个成员都会执行该函数!
+		// 		$.each(arr, function() {});
+
+		// 要遍历jQuery对象,就使用 $("div").each 这种调用形式
+		// $("div").each(function() {
+		// 	$(this).html("这是内容");
+		// });
+
+		// $.each($("div"), function() {
+		// 	$(this).html("这是内容 ----1");
+		// });
+
+		var arr = [1, 8, 9];
+		var obj = {
+			name: "小明",
+			age: 18
+		};
+		
+		// 说明 $是一个静态成员!
+		$.each(obj, function(index, value) {
+			console.log("索引号为:" + index + ", 值为: " + value)
+		});
+
+		// jQuery中的 $ 是什么? 函数!!!
+		console.log(typeof $);
+		console.log(typeof $('div'));
+	</script>
+</body>
+</html>

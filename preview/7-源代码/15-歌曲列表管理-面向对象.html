@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.container {
+			margin: 100px auto;
+			width: 850px;
+			border: 1px solid #dad8d8;
+
+			/*height: 100%;*/
+		}
+		.songslist-main, .songslist-header {
+			position: relative;
+			width: 100%;
+			text-align: center;
+		}
+		.songslist-header {
+			height: 30px;
+			border-bottom: 1px solid #dad8d8;
+			line-height: 30px;
+			background-color: #def;
+		}
+
+		.songslist-name {
+			position: absolute;
+			width: 40%;
+			height: 100%;
+			border-right: 1px solid #dad8d8;
+		}
+		.songslist-singer {
+			position: absolute;
+			left: 40%;
+			width: 50%;
+			height: 100%;
+			border-right: 1px solid #dad8d8;
+		}
+		.songslist-option {
+			position: absolute;
+			left: 90%;
+			width: 10%;
+			height: 100%;
+		}
+
+		.songslist-main {
+			background-color: #fff;
+			height: 100%;
+		}
+		.songslist-main .songslist-name{
+			height: 50px;
+			line-height: 50px;
+			border: 0;
+		}
+		.songslist-main .songslist-singer{
+			height: 50px;
+			line-height: 50px;
+			border: 0;
+		}
+		.songslist-single {
+			height: 50px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="songslist-op">
+			<label for="txtAddSName">歌曲名:</label><input type="text" id="txtAddSName" />
+			<label for="txtAddSinger">歌手:</label><input type="text" id="txtAddSinger" />
+			<button id="btnAdd">添加</button>
+			<button id="btnRemove">删除</button>
+		</div>
+
+		<div class="songslist-header">
+			<div class="songslist-name">歌曲名称</div>
+			<div class="songslist-singer">歌手</div>
+			<div class="songslist-option">操作</div>
+		</div>
+		
+		<div class="songslist-main" id="c">
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+
+			<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		// 使用面向对象 方式组织代码的基本模型：
+		// 1 有一个构造函数，用于存储数据
+		// 2 有一个原型， 用于存储行为（方法）
+		
+		// 将封装函数修改面向对象的方式：
+		// 1 将原来全局变量（存储歌曲的变量），放到构造函数中了
+		// 2 把所有的方法添加到原型中
+		// 3 修改方式方法中使用数据的方式，由普通的变量 -> 对象的属性
+		
+		// 因为现在要将歌曲列表管理与DOM关联起来
+		// 所以，现在需要一个数据渲染的方法！
+		// 设置 渲染方法的名字：render
+		// 
+		// 问题： render 方法应该放到哪？？
+		
+		// 用来管理歌曲列表
+		var SongsManager = function(list) {
+			// 如果传入了 list，那么就使用list，
+			// 如果没有传入，就使用默认值：[]
+			this.songsList = list || [];
+
+			// 调用渲染页面结构的 render 方法
+			this.render();
+		};
+		
+		SongsManager.prototype = {
+			addSong: function(songInfo) {
+				this.songsList.push(songInfo);
+
+				this.render();
+			},
+			// 2 删除
+			deleteSong: function(name) {
+				var songsList = this.songsList;
+
+				for(var i = 0; i < songsList.length; i++) {
+					if(songsList[i].sName === name) {
+						songsList.splice(i, 1);
+
+						break;
+					}
+				}
+
+				this.render();
+			},
+			// 3 删除
+			updateSong: function(name, singerName) {
+				var songsList = this.songsList;
+
+				for(var i = 0; i < songsList.length; i++) {
+					if(songsList[i].sName === name) {
+						songsList[i].sSinger = singerName;
+
+						break;
+					}
+				}
+				this.render();
+			},
+			// 查询
+			getSong: function(name) {
+				var songsList = this.songsList, msg = "";
+
+				for(var i = 0; i < songsList.length; i++) {
+					if(songsList[i].sName === name) {
+						msg = songsList[i].sSinger;
+
+						break;
+					}
+				}
+
+				console.log(msg || "没有查询到歌曲信息！");
+			}
+		};
+		
+		// 给原型对象添加一个 渲染方法 render
+		SongsManager.prototype.render = function() {
+			// 因为 CRUD 都是操作的 this.songsList 中的数据
+			// 所以，render渲染页面的方法，直接操作 this.songsList 就可以了！
+			var songsList = this.songsList;
+			// 用来存储所有的html结构（字符串）
+			var htmlArr = [];
+
+			/*<div class="songslist-single">
+				<div class="songslist-name">歌曲名称</div>
+				<div class="songslist-singer">歌手</div>
+			</div>*/
+			// 渲染结构的方式：
+			// 1 拼接字符串
+			// 		1.1 var str = "";
+			// 			str += "";
+			// 		1.2 使用数组
+			// 		
+			// 2 模板引擎
+
+			songsList.forEach(function(songInfo) {
+				// songInfo 就是每一个歌曲信息对象
+				htmlArr.push('<div class="songslist-single">');
+				htmlArr.push('	<div class="songslist-name">'+ songInfo.sName +'</div>');
+				htmlArr.push('	<div class="songslist-singer">'+ songInfo.sSinger +'</div>');
+				htmlArr.push('</div>');
+			});
+
+			// console.log( htmlArr.join("") );
+			
+			// 将拼接好的html结构设置为 指定DOM对象的 innerHTML
+			document.querySelector("#c").innerHTML = htmlArr.join("");
+		};
+
+		
+		// 使用面向对象创建实例，管理歌曲列表
+		var s1 = new SongsManager([
+			{sName: "痴心绝对", sSinger: "李圣杰"},
+			{ sName: "南山南",  sSinger: "马頔"}
+		]);
+		// s1.render();
+
+		s1.addSong({sName: "最炫民族风", sSinger: "凤凰传奇"});
+		s1.addSong({sName: "最炫民族风 -1", sSinger: "凤凰传奇 -1"});
+		s1.addSong({sName: "最炫民族风 -2", sSinger: "凤凰传奇 -2"});
+
+		// 调用渲染页面结构的方法
+		// s1.render();
+
+		// s1.getSong("最炫民族风");
+
+		// 删除
+		// s1.deleteSong("最炫民族风");
+		// s1.getSong("最炫民族风");
+
+		// 修改
+		// s1.updateSong("最炫民族风", "feng huang chuan qi");
+		// s1.getSong("最炫民族风");
+
+
+		// 找到 添加按钮绑定单击事件
+		document.querySelector("#btnAdd").onclick = function() {
+			// 获取到歌曲名称 和 歌手 文本框的值
+			var name = document.querySelector("#txtAddSName").value;
+			var singer = document.querySelector("#txtAddSinger").value;
+
+			s1.addSong({sName: name, sSinger: singer});
+		};
+
+		// 找到 删除按钮绑定单击事件
+		document.querySelector("#btnRemove").onclick = function() {
+			// 获取到歌曲名称 和 歌手 文本框的值
+			var name = document.querySelector("#txtAddSName").value;
+
+			s1.deleteSong(name);
+		};
+	</script>
+</body>
+</html>

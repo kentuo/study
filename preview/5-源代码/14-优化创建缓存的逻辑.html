@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		// 思路: 按照传入参数的个数,区分是存储数据还是获取数据
+		// 1 先判断传入参数的个数
+		// 		1.1 如果传入了一个参数,表示获取
+		// 		1.2 如果传入了两个参数,表示设置(增加/修改/删除)
+		// 2 如果存在, 直接修改就可以了
+		// 
+		// 3 如果不存在, 又分为两种情况
+		// 		3.1 缓存中存储的长度,没有超过最大值
+		// 		3.2 缓存中存储的长度,超过了最大值
+
+
+		var createCache = function() {
+			var cache = {};
+			var keyArr = [];
+
+			return function(key, value) {
+				// 获取操作
+				if(arguments.length === 1) {
+					return cache[key];
+				}
+				
+				// 设置操作
+				if( !(key in cache) ) {
+					if(keyArr.length >= 3) {
+						delete cache[keyArr.shift()];
+					}
+
+					keyArr.push(key);
+				}
+
+				cache[key] = value;
+
+			};
+		};
+
+		// 创建了一个缓存
+		var gf = createCache();
+		// 给缓存添加数据
+		gf("name-1", "老邓");
+		gf("name-2", "老王");
+		gf("name-3", "老宋");
+
+		// 获取缓存数据
+		// var name = gf("name-2");
+		// console.log(name);
+
+		gf("name-2", "小王");
+		// var name = gf("name-2");
+		// console.log(name);
+
+		// 添加数据
+		gf("name-4", "老彭");
+		var name = gf("name-4");
+		console.log(name);
+
+	</script>
+</body>
+</html>

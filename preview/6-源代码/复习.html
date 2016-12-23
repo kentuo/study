@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		li {
+			height: 30px;
+			line-height: 30px;
+			background: #def;
+			margin-bottom: 5px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>这是第01个li元素内容</li>
+		<li>这是第02个li元素内容</li>
+		<li>这是第03个li元素内容</li>
+		<li>这是第04个li元素内容</li>
+		<li>这是第05个li元素内容</li>
+		<li>这是第06个li元素内容</li>
+		<li>这是第07个li元素内容</li>
+		<li>这是第08个li元素内容</li>
+		<li>这是第09个li元素内容</li>
+		<li>这是第10个li元素内容</li>
+	</ul>
+	
+	<script type="text/javascript">
+		// 词法作用域
+		// 变量或者函数的作用范围在书写代码的时候就定下来了，与运行时无关。
+		// 即：作用域只跟代码书写位置有关，跟代码在哪执行没有关系
+		// 
+		// 在JavaScript中只有函数才能形成作用域，因此也称为：函数作用域
+
+		// 作用域链：
+		// 伪代码
+		/*var o1;
+		function fn() {
+
+			function fo() {
+
+				function f() {
+
+					// 函数o的作用域链包含了：o自身 -> 函数f的作用域 -> fo的作用域 -> fn的作用域 -> 全局作用域
+					function o() {}
+					o1 = o;
+				}
+			}
+		}
+
+		var o1 = o;
+		o1();*/
+
+		// 闭包
+		// 
+		// 从字面上看闭包就是封闭和包裹，函数内部的变量函数外部无法访问到
+		// 此时，函数就构成了一个闭包。
+		// 
+		// 闭包有两部分组成： 1 函数体 2 函数所处的环境
+		// 
+		// 闭包是个函数，而它记住了周围发生了什么，即便是离开的创造它的环境，也不例外！
+		// 
+		// 闭包对函数内部的变量起到了保护的作用，
+		// 除了返回的函数之外，无法通过任何其他手段访问到函数内部的数据
+		// 
+		// 闭包的作用是什么？
+		// 1 保护数据
+		// 2 让返回的数据变得可控
+		// 
+		// 要解决闭包的什么问题？
+		// 想办法在函数外部访问到函数内部的数据
+		// 
+		// 闭包的基本模型是什么？
+		/*function fn1() {
+			
+		}*/
+
+		function fn() {
+		  	var num = 123;
+		
+			return function() {
+			 	console.log(num);
+			};
+		}
+
+		var f1 = fn();
+		f1();
+
+		var f2 = fn();
+		f2();
+
+		
+		// 为什么返回函数，然后就能访问函数内部的数据？
+
+		// 当定义了一个函数，当前的作用域链就保存起来，
+		// 并且成为函数的内部状态的一部分。
+		// 
+		// 由于作用域链已经定下来了，即使函数离开了创造它的环境也不例外
+		// function fn() {
+		// 	var foo = function() {};
+		// 	return foo;
+		// }
+
+		// var f = fn();
+		// f();
+				
+
+		// 缓存(cache)：暂存数据方便后续计算中使用
+		// 使用 数组 或者是 对象 作为缓存的容器
+		// 
+		// 缓存的数据，一般情况下以 键值对 的形式存储
+		// 
+		// 
+		// 如何使用缓存？
+		// 1 看下缓存中是否存在我们需要的数据
+		// 2 如果存在，直接从缓存中取出来（如何取）
+		// 3 如果不存在，先去计算，并将计算结果放入缓存中（如何放）
+	    
+	    // 如何取数据：   cache[key]
+	    // 如何设置数据： cache[key] = value
+
+	    // 思路: 按照传入参数的个数, 区分是存储数据还是获取数据
+		// 1 先判断传入参数的个数
+		// 		1.1 如果传入了一个参数,表示获取
+		// 		1.2 如果传入了两个参数,表示设置(增加/修改/删除)
+		// 2 如果缓存中存在, 直接修改就可以了
+		// 
+		// 3 如果缓存中不存在, 又分为两种情况
+		// 		3.1 缓存中存储的长度,没有超过最大值
+		// 		3.2 缓存中存储的长度,超过了最大值
+
+
+		// 调用一次就会产生一个缓存，并且多个缓存之间，是不回相互影响的！
+		var createCache = function() {
+			// 对象的作用就是用来充当缓存，存储数据
+			var cache = {};
+			// 数组用来存储，缓存中数据的key
+			var keyArr = [];
+
+			return function(key, value) {
+				if(arguments.length === 1) {
+					// 表示获取数据
+					return cache[key];
+				}
+
+				if(!key in cache) {
+					// 表示缓存中不存在key
+					// 需要判断当前缓存中存储的数量
+
+					if(keyArr.length >= 3) {
+						// 缓存中存储的数据，已经达到最大值
+						// 需要删除数据，删除的是 最开始添加进来的数据
+
+						// 删除缓存中的数据
+						delete cache[ keyArr.shift() ];
+					} 
+					// 再把当前的数据添加到缓存中
+					keyArr.push(key);
+
+				}
+
+				// cache = {name: "小明"};
+				// cache["name"] = "小红"
+				cache[key] = value;
+
+			};
+		};
+
+		// 调用函数，创建缓存
+		var bf = createCache();
+
+		// 从缓存中取数据
+		bf("name");
+		// 往缓存中添加数据
+		bf("name", "xiaoming");
+
+		// 普通函数, 函数调用完之后，函数调用 占用的内容就会被释放掉
+		function f1() {
+			var a = 123;
+		}
+		f1();
+
+	</script>
+
+	<script type="text/javascript">
+		// 问题1:
+		// 以下代码的打印结果？
+		/*for(var i = 0; i < 10; i++) {
+
+			setTimeout(function() {
+				console.log(i);
+			}, 0);
+		}*/
+
+		// 问题2:
+		// 给li元素绑定单击事件，点击相应的元素打印其索引号
+		var lis = null,
+			i = 0,
+			len = 0;
+
+		lis = document.querySelectorAll("li");
+		len = lis.length;
+		for(; i < len; i++) {
+			// lis[i].index = i;
+			lis[i].onclick = function() {
+				console.log(i);
+			};
+		}
+	</script>
+</body>
+</html>

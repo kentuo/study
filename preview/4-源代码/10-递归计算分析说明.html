@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		//  求菲波那契数列的值：
+		//  
+		//  存在大量重复计算的问题!
+
+		// 记录执行次数
+		var count = 0;
+		var fib = function(n) {
+			count++;
+			if(n === 1 || n === 0) {
+				return 1;
+			}
+
+			return fib(n - 1) + fib(n - 2);
+		};
+		console.log(fib(10));
+
+		// fib(1);		// 求索引号为1的值   1
+		// fib(2);		// 求索引号为2的值   3
+		// fib(3);		// 求索引号为3的值	 5
+		// fib(4);		// 求索引号为4的值	 9
+
+		// fib(10);		// 求索引号为10的值  177
+		// fib(11);		// 求索引号为10的值  287
+
+		// fib(20);		// 求索引号为20的值  21891
+		// fib(21);		// 求索引号为20的值  35421
+		// fib(22);		// 求索引号为20的值  57313
+
+		// 获取执行次数
+		console.log(count);
+	</script>
+</body>
+</html>
