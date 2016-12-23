@@ -1,0 +1,41 @@
+// 原型链
+// 每个对象都有一个原型对象，原型对象也是对象，那么原型对象也会有它的原型对象
+// 这样一层层的往上找，就形成了一条链式结构，这个链式结构就是：原型链！
+// 
+// 属性的搜索原则，就是沿着这条链进行搜索的！
+
+// 任何一个对象顺着原型链往上找，总会找到 Object.prototype
+// 也就是说：所有的对象都与Object有着千丝万缕的联系！
+// 万物皆对象！ 此处对象就指的值： Object
+
+/*function Person() {}
+var p = new Person;
+// console.log(p.toString());
+
+// 对象本身
+console.log(p); // 这是一个空对象
+
+// 实例对象p 的原型对象, 对象中包含了一个：contructor的属性
+console.log(p.__proto__); 
+
+// toString 方法是由当前原型对象提供的！
+console.log(p.__proto__.__proto__);
+
+// console.log(Object.prototype);
+console.log(Object.prototype === p.__proto__.__proto__); // true
+
+// Object.prototype.__proto__ ===> null
+console.log(p.__proto__.__proto__.__proto__); // null*/
+
+
+// 数组中有很多方法（push/shift/join） 这些方法在哪个位置？
+var musics = ["认真的雪", "演员", "丑八怪"];
+console.log(musics);
+console.log(musics.__proto__);
+// Object 就是一个函数（构造函数）
+console.log(musics.__proto__.__proto__ === Object.prototype);
+
+// 数组的toString方法是谁提供的：数组的原型对象提供的！
+// console.log(musics.toString());
+
+
