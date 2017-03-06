@@ -1,5 +1,5 @@
 # study
-learning Web at itheima_20161023
+learning Web at itheima
 
 ## All lessions
 1. basic of html&css
