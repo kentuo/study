@@ -1,4 +1,4 @@
-# 第32天 移动web 第3天
+# 32 移动web - 3
 
 Zepto.js tap事件
 
