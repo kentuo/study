@@ -1,4 +1,4 @@
-# 第27天 Ajax 第3天
+# 27 Ajax - 3
 
 XML和JSON 封装Ajax jQuery的Ajax
 
